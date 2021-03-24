@@ -11,7 +11,7 @@ def cmdline():
     target.add_argument('-u',dest='url',type=str,help="Input your url target")
     target.add_argument('-f',dest='file',type=str,help="Input your target's file")
     output = parser.add_argument_group('Output')
-    output.add_argument('-o',dest='output',type=str,default="html",help="Select the output format.eg(html,json,csv,default:html)")
+    output.add_argument('-o',dest='output',type=str,default="html",help="Select the output format.eg(html,json,xls,default:html)")
     args = parser.parse_args()
     usage = '''
     Usage: python3 {} -u http://www.baidu.com or www.baidu.com
