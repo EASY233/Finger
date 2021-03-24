@@ -95,7 +95,7 @@ threads = 20
 
 ## 运行效果
 
-![image-20210324111641053](https://picbed.easy233.top//imgimage-20210324111641053.png)
+![](https://picbed.easy233.top//imgimage-20210324111641053.png)
 
 ![](https://picbed.easy233.top//imgimage-20210324111811080.png)
 
