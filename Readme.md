@@ -96,6 +96,6 @@ threads = 20
 ## 运行效果
 
 ![](https://picbed.easy233.top//imgimage-20210324111641053.png)
-
+扫描报告样式取自Glass样式报告:
 ![](https://picbed.easy233.top//imgimage-20210324111811080.png)
 
