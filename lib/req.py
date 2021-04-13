@@ -1,43 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author = EASY
-#from gevent import monkey,pool;monkey.patch_all()
-from concurrent.futures import ThreadPoolExecutor
+import ssl
 import requests
 import random
 import chardet
-from config import config
-from config.color import color
-from lib.Wappalyzer import Wappalyzer
-from config.data import Urls,logging,Webinfo
+import hashlib
 from bs4 import BeautifulSoup
-
-def run():
-    logging.info("The total number of targets:{0}".format(len(Urls.url)))
-    logging.info("The number of threads:{}".format(config.threads))
-    test = Request()
-    test.run()
-
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class Request:
     def __init__(self):
-        self.urls = Urls.url
         self.app = None
-        self.Wappalyzer =Wappalyzer()
+        self.datas = {}
+        self.md5 = True
 
 
-    def request(self,url):
+    def apply(self,url,md5=False):
         try:
             response = requests.get(url, timeout=1, headers=self.get_headers(), cookies=self.get_cookies(),
-                             allow_redirects=True)
-            url_info = self.response(url,response)
+                             allow_redirects=False)
+            self.response(url,response,md5)
+            return self.datas
         except Exception as e:
             pass
 
-    def response(self,url,response):
+    def response(self,url,response,md5=False):
         response_content = response.content
-        html = response_content.decode(encoding=chardet.detect(response_content)['encoding'])
+        if chardet.detect(response_content)['encoding']:
+            html = response_content.decode(encoding=chardet.detect(response_content)['encoding'])
+        else:
+            html = response.text
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
         status = response.status_code
         size = len(response.text)
@@ -48,21 +42,12 @@ class Request:
                 meta['content'] for meta in soup.findAll(
                 'meta', attrs=dict(name=True, content=True))
         }
-        app_info = self.Wappalyzer.run(response.url,html,response.headers,scripts,meta)
-        Webinfo.result[url] = {"title":title,"status":status,"size":size,"App_Info":app_info}
-        for name, value in app_info.items():
-            if name == "Application":
-                self.app = value
-                break
-            else:
-                self.app = None
-        msg = "{0} {4} {1} {2} {3}".format(color.green(str(self.app)), color.yellow(status), url, color.cyan(title),color.blue(app_info['Server']))
-        logging.success(msg)
-
-
+        if md5:
+            self.datas[url] = {"html": html, "title":title,"status":status,"headers": response.headers, "scripts": scripts, "meta": meta,"md5":hashlib.md5(response.content).hexdigest()}
+        else:
+            self.datas[url] = {"html": html, "title":title,"status":status,"headers": response.headers, "scripts": scripts, "meta": meta}
     def get_title(self,html):
         soup = BeautifulSoup(html, 'lxml')
-
         title = soup.title
         if title:
             return title.text
@@ -126,19 +111,4 @@ class Request:
     def get_cookies(self):
         cookies = {'rememberMe': 'test'}
         return cookies
-
-
-
-    def run(self):
-        #gevent_pool = pool.Pool(config.threads)
-        #gevent_pool.map(self.request,self.urls)
-        with ThreadPoolExecutor(config.threads) as pool:
-            for url in self.urls:
-                pool.submit(self.request, url)
-        logging.info("Task is done!")
-
-
-
-
-
 

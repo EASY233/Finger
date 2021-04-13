@@ -30,6 +30,7 @@ class CheckEnv:
         path.home = self.path
         path.output = os.path.join(self.path,'output')
         path.config = os.path.join(self.path,'config')
+        path.library = os.path.join(self.path, 'library')
         if not os.path.exists(path.output):
             warnMsg = "The output folder is not created, it will be created automatically"
             logging.warning(warnMsg)
