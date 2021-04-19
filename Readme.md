@@ -26,9 +26,14 @@ pip3 install -r requirements.txt
 
 ## 跟新说明
 
+### V3.0跟新
+
+- 添加了数据库(sqlite)支持功能模块，默认开启可在**config/config.py**配置文件中关闭该功能,每一次指纹识别数据都会自动添加到数据库中如果发现之前的数据已经存在会覆盖曾经的数据。
+- 修复了一些bug
+
 ### V2.0跟新
 
-- 添加了md5识别方法，可在**config/config.py**配置文件种开启该功能默认关闭。
+- 添加了md5识别方法，可在**config/config.py**配置文件中开启该功能默认关闭。
 - 指纹库使用[wappalyzer](https://github.com/chorsley/python-Wappalyzer)库()和[TideFinger](https://github.com/TideSec/TideFinger)的cms指纹库。
 - 优化了整个识别算法，让其识别更加准确更加高效。
 - 修复了若干bug
@@ -47,6 +52,9 @@ Target:
 
 Output:
   -o OUTPUT   Select the output format.eg(html,json,xml,default:html)
+DB:
+  -type TYPE  Select how you want to query
+  -key KEY    search for the keyword
   
 Usage:
 单一URL识别: python3 Finger.py -u http://www.baidu.com or www.baidu.com 
@@ -54,6 +62,9 @@ Usage:
 输出方式:
 支持html，json，xml三种格式默认html格式
 用法:python3 Finger.py -f xx.txt -o json
+从数据库中查询信息:
+-type 查询方式可通过url，title，application,status等等方式支持模糊查询
+-key 查询关键字
 ```
 
 ### 配置说明
@@ -111,8 +122,23 @@ threads = 20
 
 - 注意按照格式填写规则，name识别名字和cats识别类型必须要填。cats目前只支持四类,Application(应用)，Language(语言)，System(操作系统),Server(服务)。
 
+### 数据库操作
+
+每一次指纹识别数据都会自动添加到数据库中如果发现之前的数据已经存在会覆盖曾经的数据。
+
+![](https://picbed.easy233.top//imgimage-20210419210749211.png)
+
+并且支持直接从数据库中提取我们需要的数据:
+
+从数据库中的查询title中含有wordpress的数据。
+
+``python3 .\Finger.py -type title -key wordpress``
+
+![](https://picbed.easy233.top//imgimage-20210419210929577.png)
+
 ## 运行效果
 
 ![](https://picbed.easy233.top//imgimage-20210413095917458.png)
 扫描报告样式取自Glass样式报告:
 ![](https://picbed.easy233.top//imgimage-20210413095949209.png)
+

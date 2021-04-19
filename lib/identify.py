@@ -26,9 +26,9 @@ class Identify:
                 self.name.append(line)
             self._prepare_app(line)
         Msg = "成功加载{0}指纹库,共加载指纹{1}".format(filepath,len(self.name))
-        logging.info(Msg)
+        logging.success(Msg)
         Msg = "是否开启了MD5指纹识别:{0}".format(config.checkmd5)
-        logging.info(Msg)
+        logging.success(Msg)
         self.fingers = obj
         self.req = Request()
         self.md5 = config.checkmd5
@@ -136,7 +136,7 @@ class Identify:
         detected_apps['title'] = self.title
         detected_apps['status'] = self.status
         Msg = "{0} {1} {2} {4} {3}".format(color.green(detected_apps['Application']),color.blue(detected_apps['Server']),detected_apps['title'],color.yellow(detected_apps['status']),url)
-        logging.success(Msg)
+        logging.info(Msg)
         Webinfo.result[url] = detected_apps
 
     def run(self):

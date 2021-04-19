@@ -10,5 +10,5 @@ path = AttribDict()
 Urls = AttribDict()
 Webinfo = AttribDict()
 Save = AttribDict()
-Proxylist = AttribDict()
+Db = AttribDict()
 Webinfo.result = {}

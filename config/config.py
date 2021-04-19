@@ -3,7 +3,7 @@
 # author = EASY
 
 
-Version = "V2.0"
+Version = "V3.0"
 Author = "EASY"
 Website = "https://www.easy233.top"
 Banner = '''\033[1;31m
@@ -24,3 +24,5 @@ ______ _
 threads = 20
 # 是否开启通过md5进行指纹识别，默认关闭
 checkmd5 = False
+# 是否把数据指纹识别数据自动添加到数据库中，默认开启
+Dbsave = True

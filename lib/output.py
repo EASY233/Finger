@@ -44,7 +44,7 @@ class Output:
             server = value['Server']
             system = value['System']
             tr = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>".format(
-                num, url, title, application, server,language, system,status)
+                num, url, title, application, server,language, status,system)
             trs.append(tr)
         html = html.replace("{{content}}", ''.join(trs))
         with open(self.path_html, 'w', encoding='utf-8') as f:

@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author = EASY
-import ssl
 import requests
 import random
 import chardet
 import hashlib
 from bs4 import BeautifulSoup
-ssl._create_default_https_context = ssl._create_unverified_context
-
+import urllib3
+urllib3.disable_warnings()
 
 class Request:
     def __init__(self):
@@ -20,7 +19,7 @@ class Request:
     def apply(self,url,md5=False):
         try:
             response = requests.get(url, timeout=1, headers=self.get_headers(), cookies=self.get_cookies(),
-                             allow_redirects=False)
+                             allow_redirects=True,verify=False)
             self.response(url,response,md5)
             return self.datas
         except Exception as e:

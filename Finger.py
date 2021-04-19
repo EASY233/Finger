@@ -7,6 +7,7 @@ from lib.cmdline import cmdline
 from lib.checkenv import CheckEnv
 from lib.output import Output
 from lib.identify import Identify
+from lib.sql import Save
 
 if __name__ == '__main__':
     # 打印logo
@@ -19,8 +20,8 @@ if __name__ == '__main__':
     test = Identify()
     test.run()
     # # 保存数据
+    dbsave = Save()
     save = Output()
-
 
 
 

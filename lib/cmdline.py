@@ -3,7 +3,8 @@
 # author = EASY
 import argparse
 import os
-from config.data import Urls,logging,Save
+from lib.sql import Save
+from config.data import Urls,logging,Save,Db
 
 def cmdline():
     parser = argparse.ArgumentParser(description="Finger scan --by EASY")
@@ -12,6 +13,9 @@ def cmdline():
     target.add_argument('-f',dest='file',type=str,help="Input your target's file")
     output = parser.add_argument_group('Output')
     output.add_argument('-o',dest='output',type=str,default="html",help="Select the output format.eg(html,json,xls,default:html)")
+    db = parser.add_argument_group("DB")
+    db.add_argument("-type",dest="type",type=str,default="",help="Select how you want to query")
+    db.add_argument("-key",dest="key",type=str,default="",help="search for the keyword")
     args = parser.parse_args()
     usage = '''
     Usage: python3 {} -u http://www.baidu.com or www.baidu.com
@@ -22,6 +26,8 @@ def cmdline():
 def initoption(args):
     url = args.url
     file = args.file
+    Db.type = args.type
+    Db.key = args.key
     output = args.output
     Urls.url = []
     if url:
