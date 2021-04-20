@@ -32,20 +32,20 @@ def initoption(args):
     Urls.url = []
     if url:
         if not url.startswith('http'):
-            _u = "http://" + str(_url)
-            _urls = "https://" + str(_url)
-            Urls.url.append(_u)
-            Urls.url.append(_urls)
-        else:
-            Urls.url.append(_url)
+            url = "http://" + str(url)
+        Urls.url.append(url)
     if file:
         if os.path.exists(file):
             with open(file,'r') as f:
                 for i in f:
                     _url = i.strip('\n')
                     if not _url.startswith('http'):
-                        _url = "http://" + str(_url)
-                    Urls.url.append(_url)
+                        _u = "http://" + str(_url)
+                        _urls = "https://" + str(_url)
+                        Urls.url.append(_u)
+                        Urls.url.append(_urls)
+                    else:
+                        Urls.url.append(_url)
         else:
             errMsg = "File {0} is not find".format(file)
             logging.error(errMsg)
