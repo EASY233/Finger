@@ -32,8 +32,12 @@ def initoption(args):
     Urls.url = []
     if url:
         if not url.startswith('http'):
-            url = "http://" + str(url)
-        Urls.url.append(url)
+            _u = "http://" + str(_url)
+            _urls = "https://" + str(_url)
+            Urls.url.append(_u)
+            Urls.url.append(_urls)
+        else:
+            Urls.url.append(_url)
     if file:
         if os.path.exists(file):
             with open(file,'r') as f:
