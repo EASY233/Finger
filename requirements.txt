@@ -1,0 +1,4 @@
+mmh3
+requests
+xlsxwriter
+bs4
