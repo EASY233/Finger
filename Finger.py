@@ -8,7 +8,6 @@ from lib.req import Request
 from lib.output import Output
 from lib.identify import Identify
 from lib.options import initoptions
-from lib.sql import Save
 
 if __name__ == '__main__':
     # 打印logo
