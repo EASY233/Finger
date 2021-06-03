@@ -3,54 +3,66 @@
 # author = EASY
 import requests
 import random
+import codecs
+import mmh3
 import chardet
-import hashlib
+from urllib.parse import urlsplit,urljoin
+from config.data import Urls,Webinfo
+from config import config
+from lib.identify import Identify
 from bs4 import BeautifulSoup
 import urllib3
 urllib3.disable_warnings()
+from concurrent.futures import ThreadPoolExecutor
 
 class Request:
     def __init__(self):
-        self.app = None
-        self.datas = {}
-        self.md5 = True
+        Webinfo.result = []
+        self.checkcms = Identify()
+        with ThreadPoolExecutor(config.threads) as pool:
+            run = pool.map(self.apply,Urls.url)
 
 
-    def apply(self,url,md5=False):
+    def apply(self,url):
         try:
-            response = requests.get(url, timeout=1, headers=self.get_headers(), cookies=self.get_cookies(),
-                             allow_redirects=True,verify=False)
-            self.response(url,response,md5)
-            return self.datas
+            proxies = {'http': 'http://127.0.0.1:8080', 'https': 'https://127.0.0.1:8080'}
+            response = requests.get(url, timeout=5, headers=self.get_headers(), cookies=self.get_cookies(),verify=False,allow_redirects=True)
+            self.response(url,response)
         except Exception as e:
             pass
 
-    def response(self,url,response,md5=False):
+    def response(self,url,response):
         response_content = response.content
-        if chardet.detect(response_content)['encoding']:
-            html = response_content.decode(encoding=chardet.detect(response_content)['encoding'])
-        else:
-            html = response.text
+        response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
+        html = response.content.decode(response.encoding)
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
         status = response.status_code
         size = len(response.text)
-        soup = BeautifulSoup(html,'html.parser')
-        scripts = [script['src'] for script in soup.findAll('script', src=True)]
-        meta = {
-            meta['name'].lower():
-                meta['content'] for meta in soup.findAll(
-                'meta', attrs=dict(name=True, content=True))
-        }
-        if md5:
-            self.datas[url] = {"html": html, "title":title,"status":status,"headers": response.headers, "scripts": scripts, "meta": meta,"md5":hashlib.md5(response.content).hexdigest()}
+        if "Server" in response.headers:
+            Server = response.headers["Server"]
         else:
-            self.datas[url] = {"html": html, "title":title,"status":status,"headers": response.headers, "scripts": scripts, "meta": meta}
+            Server = ""
+        faviconhash = self.get_faviconhash(url)
+        datas = {"url":url,"title":title,"body":html,"status":status,"Server":Server,"size":size,"header":response.headers,"faviconhash":faviconhash}
+        self.checkcms.run(datas)
+
+    def get_faviconhash(self,url):
+        try:
+            parsed = urlsplit(url)
+            url = urljoin(parsed.scheme+"://"+parsed.netloc,"favicon.ico")
+            response = requests.get(url,headers=self.get_headers())
+            favicon = codecs.encode(response.content, "base64")
+            hash = mmh3.hash(favicon)
+            return hash
+        except:
+            return 0
+
+
     def get_title(self,html):
         soup = BeautifulSoup(html, 'lxml')
         title = soup.title
-        if title:
+        if title and title.text:
             return title.text
-
         h1 = soup.h1
         if h1:
             return h1.text
@@ -101,7 +113,6 @@ class Request:
             'Cache-Control': 'max-age=0',
             'Connection': 'keep-alive',
             'DNT': '1',
-            'Referer': 'https://www.google.com/',
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': ua,
         }

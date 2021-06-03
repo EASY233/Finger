@@ -1,144 +1,104 @@
-## 前言
+<h1 align="center">
+  <br>
+  <img src="https://picbed.easy233.top//imgQQ%E6%88%AA%E5%9B%BE20210603085018.png" width="400px" alt="Finger">
+</h1>
 
-一直苦于没有用的顺手的web指纹识别工具，学习前辈s7ckTeam的[Glass](https://github.com/s7ckTeam/Glass)和broken5的[WebAliveScan](https://github.com/broken5/WebAliveScan)优秀开源程序开发的轻量型web指纹工具。
+<h4 align="center">一款红队在大量的资产中存活探测与重点攻击系统指纹探测工具</h4>
 
-## 安装
+<p align="center">
+  <a href="#开始">开始</a> •
+  <a href="#支持选项">支持选项</a> •
+  <a href="#指纹识别规则">指纹识别规则</a> •
+  <a href="#实际效果">实际效果</a> •
+  <a href="#todo">TODO</a> •
+  <a href="#感谢列表">感谢列表</a>
+</p>
 
-### 开发语言
+<p align="center">
+    <img src="https://img.shields.io/badge/Author-EASY-da282a">
+    <img src="https://img.shields.io/badge/language-python3.7-da282a"></a>
+    <img src="https://img.shields.io/badge/version-V4.0-da282a">
+</p>
 
-- python3
 
-### 运行环境
+## 开始
 
-- Linux
-- Windows
-- Mac
+Finger定位于一款红队在大量的资产中存活探测与重点攻击系统指纹探测工具。在面临大量资产时候Finger可以快速从中查找出重点攻击系统协助我们快速展开渗透。早有前辈贡献出优秀的作品[[EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具](https://github.com/EdgeSecurityTeam/EHole) 但是该项目代码不开源我想做出一些修改也没有办法，所以决定使用其指纹库自行开发一个趁手的工具。
 
-### 安装
+## 支持选项
 
-```
-git clone https://github.com/EASY233/Finger
-cd Finger
+### 下载使用
+
+Finger使用python3.7开发全平台支持,可以使用下面命令下载使用:
+
+```html
+git clone https://github.com/EASY233/Finger.git
 pip3 install -r requirements.txt
+python3 Finger.py -h
 ```
-
-
-
-## 跟新说明
-
-### V3.0跟新
-
-- 添加了数据库(sqlite)支持功能模块，默认开启可在**config/config.py**配置文件中关闭该功能,每一次指纹识别数据都会自动添加到数据库中如果发现之前的数据已经存在会覆盖曾经的数据。
-- 修复了一些bug
-
-### V2.0跟新
-
-- 添加了md5识别方法，可在**config/config.py**配置文件中开启该功能默认关闭。
-- 指纹库使用[wappalyzer](https://github.com/chorsley/python-Wappalyzer)库()和[TideFinger](https://github.com/TideSec/TideFinger)的cms指纹库。
-- 优化了整个识别算法，让其识别更加准确更加高效。
-- 修复了若干bug
-
-## 使用方法
 
 ### 参数说明
 
-```
-optional arguments:
-  -h, --help  show this help message and exit
+Finger追求极简命令参数只有以下几个:
 
-Target:
-  -u URL      Input your url target
-  -f FILE     Input your target's file
+- -u  对单个URL进行指纹识别
+- -f   对指定文件进行批量指纹识别
+- -o  指定输出方式默认不选择的话是html格式，支持html，json，xls。
 
-Output:
-  -o OUTPUT   Select the output format.eg(html,json,xml,default:html)
-DB:
-  -type TYPE  Select how you want to query
-  -key KEY    search for the keyword
-  
-Usage:
-单一URL识别: python3 Finger.py -u http://www.baidu.com or www.baidu.com 
-批量URL识别: python3 Finger.py -f xx.txt
-输出方式:
-支持html，json，xml三种格式默认html格式
-用法:python3 Finger.py -f xx.txt -o json
-从数据库中查询信息:
--type 查询方式可通过url，title，application,status等等方式支持模糊查询
--key 查询关键字
-```
+Finger支持的URL格式有:www.baidu.com , 127.0.0.1,http://www.baidu.com。但是前两种不推荐使用Finger会在URL处理阶段自动为其添加``http://``和``https://``
 
 ### 配置说明
 
-默认线程数为20实际需要修改可以在``config/config.py``中进行修改
+默认线程数为50实际需要修改可以在`config/config.py`中进行修改
 
 ```
-threads = 20
+threads = 50
 ```
 
-指纹识别库在``library/end.json``中可执行添加修改,添加修改规则:
+## 指纹识别规则
 
-支持的规则如下:
-
-- 从headers头中匹配规则
-- 从html内容中匹配规则
-- 从script中匹配规则
-- 从meta中匹配规则
-- 请求特定的页面进行规则匹配(md5或者keyword)
-
-下面是一些例子:
+Finger的指纹规则学习之[EHole(棱洞)]([EdgeSecurityTeam/EHole: EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具 (github.com)](https://github.com/EdgeSecurityTeam/EHole))。指纹格式如下:
 
 ```
+cms：系统名称
+method：识别方式 (支持三种识别方式，分别为：keyword、faviconhash、regula)
+location：位置（指纹识别位置，提供两个位置，一个为body，一个为header）
+keyword：关键字（favicon图标hash、正则表达式、关键字）
+```
+
+keyword支持多关键字匹配，需要所有关键字匹配上才能识别。
+
+一个简单例子:
+
+```json
 {
-	"name": "WordPress",
-	"cats": "Application",
-	"html": ["<link rel=[\"']stylesheet[\"'] [^>]+wp-(?:content|includes)", "<link[^>]+s\\d+\\.wp\\.com"],
-	"meta": {
-		"generator": "WordPress( [\\d.]+)?\\;version:\\1"
-	}
-	, {
-	"name": "phpSQLiteCMS",
-	"cats": "Application",
-	"meta": {
-		"generator": "^phpSQLiteCMS(?: (.+))?$\\;version:\\1"
-	}
-},{
-	"name": "非凡建站",
-	"cats": "Application",
-	"matches": {
-		"url": "/images/Jobs_resume_up.gif",
-		"md5": "041718edc41fb801317c3a0b1f4b7ca9"
-	}
-}, {
-	"name": "非凡建站",
-	"cats": "Application",
-	"matches": {
-		"url": "/qq/images/mid4.gif",
-		"md5": "a2d236f6cf10df3342e017a8aea7de31"
-	}
+		"cms": "seeyon",
+		"method": "keyword",
+		"location": "body",
+		"keyword": ["/seeyon/USER-DATA/IMAGES/LOGIN/login.gif"]
 }
 ```
 
-一些注意事项:
+## 实际效果
 
-- 注意按照格式填写规则，name识别名字和cats识别类型必须要填。cats目前只支持四类,Application(应用)，Language(语言)，System(操作系统),Server(服务)。
+![](https://picbed.easy233.top//imgimage-20210603090340543.png)
 
-### 数据库操作
+扫描报告样式取自Glass样式报告，对识别出来的重点资产(即是CMS识别到的资产)会优先展示出来:
+![](https://picbed.easy233.top//imgimage-20210603090736766.png)
 
-每一次指纹识别数据都会自动添加到数据库中如果发现之前的数据已经存在会覆盖曾经的数据。
+## TODO
 
-![](https://picbed.easy233.top//imgimage-20210419210749211.png)
+- [ ] 1.对接网络空间搜索引擎
+- [ ] 2.优化输出模板样式。
+- [ ] 3.实现在线同步指纹库。
 
-并且支持直接从数据库中提取我们需要的数据:
+## 感谢列表
 
-从数据库中的查询title中含有wordpress的数据。
+[Glass(镜) V2.0-剑客到刺客的蜕变](https://github.com/s7ckTeam/Glass)
 
-``python3 .\Finger.py -type title -key wordpress``
+[EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具](https://github.com/EdgeSecurityTeam/EHole)
 
-![](https://picbed.easy233.top//imgimage-20210419210929577.png)
+[WebAliveScan](https://github.com/broken5/WebAliveScan)
 
-## 运行效果
-
-![](https://picbed.easy233.top//imgimage-20210413095917458.png)
-扫描报告样式取自Glass样式报告:
-![](https://picbed.easy233.top//imgimage-20210413095949209.png)
+感谢**Ti0s** 提供的建议
 

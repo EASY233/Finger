@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author = EASY
-import time
 from config import config
 from lib.cmdline import cmdline
 from lib.checkenv import CheckEnv
+from lib.req import Request
 from lib.output import Output
 from lib.identify import Identify
+from lib.options import initoptions
 from lib.sql import Save
 
 if __name__ == '__main__':
@@ -15,12 +16,13 @@ if __name__ == '__main__':
     # 检测环境
     check = CheckEnv()
     # 加载参数
-    cmdline()
-    # 运行程序
-    test = Identify()
-    test.run()
-    # # 保存数据
-    dbsave = Save()
+    options = initoptions(cmdline())
+    run = Request()
+    # # 运行程序
+    # test = Identify()
+    # test.run()
+    # # # 保存数据
+    # dbsave = Save()
     save = Output()
 
 
