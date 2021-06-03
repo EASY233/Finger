@@ -81,10 +81,10 @@ keyword支持多关键字匹配，需要所有关键字匹配上才能识别。
 
 ## 实际效果
 
-![](https://picbed.easy233.top//imgimage-20210603090340543.png)
+![](./img/imgimage-20210603090340543.png)
 
 扫描报告样式取自Glass样式报告，对识别出来的重点资产(即是CMS识别到的资产)会优先展示出来:
-![](https://picbed.easy233.top//imgimage-20210603090736766.png)
+![](./img/imgimage-20210603090736766.png)
 
 ## TODO
 
