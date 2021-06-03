@@ -16,8 +16,8 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Author-EASY-da282a">
-    <img src="https://img.shields.io/badge/language-python3.7-da282a"></a>
-    <img src="https://img.shields.io/badge/version-V4.0-da282a">
+    <img src="https://img.shields.io/badge/Language-python3.7-da282a"></a>
+    <img src="https://img.shields.io/badge/Version-V4.0-da282a">
 </p>
 
 
