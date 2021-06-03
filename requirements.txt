@@ -2,3 +2,4 @@ mmh3
 requests
 xlsxwriter
 bs4
+lxml
