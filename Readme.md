@@ -45,7 +45,7 @@ Finger追求极简命令参数只有以下几个:
 - -f   对指定文件进行批量指纹识别
 - -o  指定输出方式默认不选择的话是html格式，支持html，json，xls。
 
-Finger支持的URL格式有:www.baidu.com , 127.0.0.1,http://www.baidu.com。但是前两种不推荐使用Finger会在URL处理阶段自动为其添加``http://``和``https://``
+Finger支持的URL格式有:www.baidu.com , 127.0.0.1,http://www.baidu.com。 但是前两种不推荐使用Finger会在URL处理阶段自动为其添加``http://``和``https://``
 
 ### 配置说明
 
@@ -57,7 +57,7 @@ threads = 50
 
 ## 指纹识别规则
 
-Finger的指纹规则学习之[EHole(棱洞)]([EdgeSecurityTeam/EHole: EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具 (github.com)](https://github.com/EdgeSecurityTeam/EHole))。指纹格式如下:
+Finger的指纹规则学习之[EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具](https://github.com/EdgeSecurityTeam/EHole)。指纹格式如下:
 
 ```
 cms：系统名称
