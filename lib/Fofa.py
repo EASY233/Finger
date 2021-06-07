@@ -30,7 +30,7 @@ class Fofa:
     def run(self,ip):
         keyword = "ip={}".format(ip)
         keyword = quote(str(base64.b64encode(keyword.encode()), encoding='utf-8'))
-        url = "https://fofa.so/api/v1/search/all?email={0}&key={1}&qbase64={2}&full=false&fields=ip,title,port,domain,protocol,host&size={3}".format(
+        url = "https://fofa.so/api/v1/search/all?email={0}&key={1}&qbase64={2}&full=false&fields=protocol,host&size={3}".format(
             self.email, self.key, keyword, self.size)
         try:
             response = requests.get(url,timeout=10,headers = self.headers )
@@ -38,14 +38,17 @@ class Fofa:
             for data in datas["results"]:
                 for keys in data:
                     if "http" == keys or "https" == keys:
-                        Urls.url.append("{0}://{1}/".format(data[4], data[5]))
-                        logging.info("{0}://{1}/".format(data[4], data[5]))
+                        Urls.url.append("{0}://{1}/".format(data[0], data[1]))
+                        logging.info("{0}://{1}/".format(data[0], data[1]))
         except requests.exceptions.ReadTimeout:
             logging.error("请求超时")
         except requests.exceptions.ConnectionError:
             logging.error("网络超时")
         except json.decoder.JSONDecodeError:
             logging.error("获取失败，请重试")
+        except:
+            logging.error("获取失败")
+            pass
 
 
     def check(self):
