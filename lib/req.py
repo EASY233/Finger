@@ -37,10 +37,7 @@ class Request:
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
         status = response.status_code
         size = len(response.text)
-        if "Server" in response.headers:
-            Server = response.headers["Server"]
-        else:
-            Server = ""
+        Server = response.headers["Server"] if "Server" in response.headers else ""
         faviconhash = self.get_faviconhash(url)
         datas = {"url":url,"title":title,"body":html,"status":status,"Server":Server,"size":size,"header":response.headers,"faviconhash":faviconhash}
         self.checkcms.run(datas)
@@ -62,17 +59,12 @@ class Request:
         title = soup.title
         if title and title.text:
             return title.text
-        h1 = soup.h1
-        if h1:
-            return h1.text
-        h2 = soup.h2
-        if h2:
-            return h2.text
-
-        h3 = soup.h3
-        if h2:
-            return h3.text
-
+        if soup.h1:
+            return soup.h1.text
+        if soup.h2:
+            return soup.h2.text
+        if soup.h3:
+            return soup.h3.text
         desc = soup.find('meta', attrs={'name': 'description'})
         if desc:
             return desc['content']

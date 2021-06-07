@@ -6,7 +6,7 @@ import re
 import json
 from config.data import path
 from config.color import color
-from config.data import Urls,logging,Webinfo
+from config.data import logging,Webinfo
 
 
 class Identify:

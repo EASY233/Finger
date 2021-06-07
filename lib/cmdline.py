@@ -4,7 +4,7 @@
 import argparse
 
 def cmdline():
-    parser = argparse.ArgumentParser(description="Finger scan --by EASY")
+    parser = argparse.ArgumentParser(description="Finger 一款红队在大量的资产中存活探测与重点攻击系统指纹探测工具 --by EASY")
     target = parser.add_argument_group('Target')
     target.add_argument('-u',dest='url',type=str,help="Input your url target")
     target.add_argument('-f',dest='file',type=str,help="Input your target's file")
@@ -14,11 +14,5 @@ def cmdline():
     output = parser.add_argument_group('Output')
     output.add_argument('-o',dest='output',type=str,default="html",help="Select the output format.eg(html,json,xls,default:html)")
     args = parser.parse_args()
-    usage = '''
-    Usage: python3 {0} -u http://www.baidu.com
-    Usage: python3 {0} -f urls.txt
-    Usage: python3 {0} -i 192.168.10.1 or 192.168.10.1/24 or 192.168.10.10-192.168.10.25
-    Usage: python3 {0} -if ips.txt
-    '''.format(parser.prog)
     return args
 

@@ -17,6 +17,7 @@ if __name__ == '__main__':
     # 加载参数
     options = initoptions(cmdline())
     fofa = Fofa()
+
     run = Request()
     save = Output()
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author = EASY
-import argparse
 import platform
-import sys
 import os
 from config.data import path,logging
 
