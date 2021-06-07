@@ -19,7 +19,7 @@ class Request:
         Webinfo.result = []
         self.checkcms = Identify()
         with ThreadPoolExecutor(config.threads) as pool:
-            run = pool.map(self.apply,Urls.url)
+            run = pool.map(self.apply,set(Urls.url))
 
 
     def apply(self,url):
