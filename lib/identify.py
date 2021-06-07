@@ -55,7 +55,7 @@ class Identify:
          cms = []
          for line in self.obj:
              flag = 1
-             if line['method'] == "faviconhash" and self.datas["faviconhash"] == line["keyword"][0]:
+             if line['method'] == "faviconhash" and str(self.datas["faviconhash"]) == line["keyword"][0]:
                  cms.append(line["cms"])
              elif line["method"] == "keyword":
                  for key in line["keyword"]:

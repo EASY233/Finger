@@ -8,7 +8,7 @@ logging  = MY_LOGGER
 
 path = AttribDict()
 Urls = AttribDict()
+Ips = AttribDict()
 Webinfo = AttribDict()
 Save = AttribDict()
-Db = AttribDict()
 Webinfo.result = {}

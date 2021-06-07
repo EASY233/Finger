@@ -11,14 +11,16 @@
   <a href="#指纹识别规则">指纹识别规则</a> •
   <a href="#实际效果">实际效果</a> •
   <a href="#todo">TODO</a> •
+  <a href="#更新日志">更新日志</a> •
   <a href="#感谢列表">感谢列表</a>
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Author-EASY-da282a">
     <img src="https://img.shields.io/badge/Language-python3.7-da282a"></a>
-    <img src="https://img.shields.io/badge/Version-V4.0-da282a">
+    <img src="https://img.shields.io/badge/Version-V4.1-da282a">
 </p>
+
 
 
 ## 开始
@@ -42,17 +44,25 @@ python3 Finger.py -h
 Finger追求极简命令参数只有以下几个:
 
 - -u  对单个URL进行指纹识别
-- -f   对指定文件进行批量指纹识别
+- -f   对指定文件中的url进行批量指纹识别
+- -i    对ip进行fofa数据查询采集其web资产
+- -if   对指定文件中的ip批量调用fofa进行数据查询采集其web资产
 - -o  指定输出方式默认不选择的话是html格式，支持html，json，xls。
 
 Finger支持的URL格式有:www.baidu.com , 127.0.0.1,http://www.baidu.com。 但是前两种不推荐使用Finger会在URL处理阶段自动为其添加``http://``和``https://``
 
+Finger支持的IP格式有单个IP格式192.168.10.1,IP段192.168.10.1/24，某一小段IP192..168.10.10-192.168.10.50满足日常使用的所有需求。Finger会首先通过Fofa采集IP的web资产，然后对其进行存活探测以及系统指纹探测。
+
 ### 配置说明
 
-默认线程数为50实际需要修改可以在`config/config.py`中进行修改
+默认线程数为50实际需要修改可以在`config/config.py`中进行修改，调用fofa查询功能需要从配置文件修改为自已对应的fofa api信息。
 
 ```
 threads = 50
+Fofa_email = ""
+Fofa_key = ""
+# 普通会员API查询数据是前100，高级会员是前10000条根据自已的实际情况进行调整。
+Fofa_Size = 100
 ```
 
 ## 指纹识别规则
@@ -81,24 +91,43 @@ keyword支持多关键字匹配，需要所有关键字匹配上才能识别。
 
 ## 实际效果
 
+URL批量扫描效果如下:
+
 ![](./img/imgimage-20210603090340543.png)
 
-扫描报告样式取自Glass样式报告，对识别出来的重点资产(即是CMS识别到的资产)会优先展示出来:
-![](./img/imgimage-20210603090736766.png)
+调用Fofa效果扫描如下:
+
+![](./img/20210607103818_mosaic.png)
+
+扫描报告样式学习自[AUTO-EARN](https://github.com/Echocipher/AUTO-EARN)，重点资产和普通资产分开展示:
+![](./img/6.png)
 
 ## TODO
 
-- [ ] 1.对接网络空间搜索引擎
-- [ ] 2.优化输出模板样式。
+- [x] 1.对接网络空间搜索引擎
+- [x] 2.优化输出模板样式。
 - [ ] 3.实现在线同步指纹库。
 
+## 更新日志
+
+没想到能够获取到这么多star，真的非常高兴也让我更加坚定把该工具开发的更加完善。
+
+### V4.1跟新说明
+
+- 修复了不能通过faviconhash进行指纹识别的严重bug
+- 优化了html格式的输出报告
+- 添加了Fofa数据查询功能
+
 ## 感谢列表
+在开发过程中参考学习了非常多前辈们的优秀开源项目，特此感谢!
 
 [Glass(镜) V2.0-剑客到刺客的蜕变](https://github.com/s7ckTeam/Glass)
 
 [EHole(棱洞)2.0 重构版-红队重点攻击系统指纹探测工具](https://github.com/EdgeSecurityTeam/EHole)
 
 [WebAliveScan](https://github.com/broken5/WebAliveScan)
+
+[AUTO-EARN](https://github.com/Echocipher/AUTO-EARN)
 
 感谢**Ti0s** 提供的建议
 

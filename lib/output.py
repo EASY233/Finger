@@ -27,19 +27,27 @@ class Output:
             self.outXls()
 
     def outHtml(self):
+        Focus_num = 0
         num = 0
-        trs = []
+        Focus_assets = []
+        assets = []
         reportTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        html = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KICA8aGVhZD4KICAgIDxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KICAgIDxtZXRhIGh0dHAtZXF1aXY9IlgtVUEtQ29tcGF0aWJsZSIgY29udGVudD0iSUU9ZWRnZSI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEiPgoKICAgIDx0aXRsZT5GaW5nZXLmiavmj4/miqXlkYo8L3RpdGxlPgoKICAgIDxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSJTb3VyY2UgY29kZSBnZW5lcmF0ZWQgdXNpbmcgbGF5b3V0aXQuY29tIj4KICAgIDxtZXRhIG5hbWU9ImF1dGhvciIgY29udGVudD0iTGF5b3V0SXQhIj4KCiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHA6Ly9jZG4uYm9vdGNzcy5jb20vYm9vdHN0cmFwLzMuMy4wL2Nzcy9ib290c3RyYXAubWluLmNzcyI+IAogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwOi8vY2RuLmJvb3Rjc3MuY29tL2ZvbnQtYXdlc29tZS80LjIuMC9jc3MvZm9udC1hd2Vzb21lLm1pbi5jc3MiPiAKCiAgPC9oZWFkPgogIDxib2R5PgoKICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lci1mbHVpZCI+Cgk8ZGl2IGNsYXNzPSJyb3ciPgoJCTxkaXYgY2xhc3M9ImNvbC1tZC0xMiI+CgkJCTxkaXYgY2xhc3M9InBhZ2UtaGVhZGVyIj4KCQkJCTxoMT4KCQkJCQlGaW5nZXLmiavmj4/miqXlkYogIDxzbWFsbD57e3ZlcnNpb259fTwvc21hbGw+CgkJCQk8L2gxPgoJCQk8L2Rpdj4gPHNwYW4gY2xhc3M9ImxhYmVsIGxhYmVsLXByaW1hcnkiPueUn+aIkOaXtumXtO+8mnt7cmVwb3J0VGltZX19PC9zcGFuPgogICAgICAgICAgICA8L2JyPjwvYnI+CgkJCTx0YWJsZSBjbGFzcz0idGFibGUiPgoJCQkJPHRoZWFkPgoJCQkJCTx0cj4KICAgIDx0aD4jPC90aD4KICAgIDx0aD51cmw8L3RoPgogICAgPHRoPnRpdGxlPC90aD4KICAgIDx0aD5jbXM8L3RoPgogICAgPHRoPlNlcnZlcjwvdGg+CiAgIDx0aD5zdGF0dXM8L3RoPgogICA8dGg+c2l6ZTwvdGg+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3RyPgoJCQkJPC90aGVhZD4KICAgICAgICAgICAgICAgIAoJCQkJPHRib2R5PgogICAgICAgICAgICAgICAgICAgIHt7Y29udGVudH19CgkJCQk8L3Rib2R5PgoJCQk8L3RhYmxlPgoJCTwvZGl2PgoJPC9kaXY+CjwvZGl2PgogIDwvYm9keT4KPC9odG1sPg=="
+        html = "PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KCTxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4gCgk8dGl0bGU+RmluZ2Vy5omr5o+P5oql5ZGKPC90aXRsZT4KCTxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9jZG4uc3RhdGljZmlsZS5vcmcvdHdpdHRlci1ib290c3RyYXAvMy4zLjcvY3NzL2Jvb3RzdHJhcC5taW4uY3NzIj4gIAoJPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2RuLnN0YXRpY2ZpbGUub3JnL2pxdWVyeS8yLjEuMS9qcXVlcnkubWluLmpzIj48L3NjcmlwdD4KCTxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5zdGF0aWNmaWxlLm9yZy90d2l0dGVyLWJvb3RzdHJhcC8zLjMuNy9qcy9ib290c3RyYXAubWluLmpzIj48L3NjcmlwdD4KCTxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2VjaGFydHNANC43LjAvZGlzdC9lY2hhcnRzLm1pbi5qcyI+PC9zY3JpcHQ+CjwvaGVhZD4KPGJvZHk+Cgk8ZGl2IGNsYXNzPSJwYW5lbCBwYW5lbC1kZWZhdWx0Ij4KCQk8ZGl2IGNsYXNzPSJjb250YWluZXIiPgoJCQk8ZGl2IGNsYXNzPSJqdW1ib3Ryb24iPgoJCQkJPGgxPkZpbmdlcjwvaDE+CgkJCQk8aDI+5LiA5qy+57qi6Zif5Zyo5aSn6YeP55qE6LWE5Lqn5Lit5a2Y5rS75o6i5rWL5LiO6YeN54K55pS75Ye757O757uf5oyH57q55o6i5rWL5bel5YW3PC9oMj4KCQkJCSAgICAgICAgICAgIDxwIHN0eWxlPSJmb250LWZhbWlseTog5qW35L2TO2ZvbnQtc2l6ZTogMTZwdDtmb250LXdlaWdodDogYm9sZCI+5b2T5YmN6LWE5Lqn5oC75pWw77yae3t0b3RhbH19PC9wPgoJCQkJPCEtLSDlrZDln5/or6bmg4UgLS0+CgkJCQk8ZGl2PiAKCQkJCQk8ZGl2IGNsYXNzPSJwYW5lbC1oZWFkaW5nIj4KCQkJCQkJPGgzIGNsYXNzPSJwYW5lbC10aXRsZSI+CgkJCQkJCQk8c3BhbiBjbGFzcz0ibGFiZWwgbGFiZWwtaW5mbyI+6YeN54K55YWz5rOo6LWE5LqnPC9zcGFuPgoJCQkJCQk8L2gzPgoJCQkJCTwvZGl2PgoJCQkJCTxkaXYgY2xhc3M9InBhbmVsLWJvZHkiPgoJCQkJCQk8dGFibGUgY2xhc3M9InRhYmxlIHRhYmxlLWhvdmVyIiBzdHlsZT0id29yZC1icmVhazpicmVhay1hbGw7IHdvcmQtd3JhcDpicmVhay1hbGw7Ij4KCQkJCQkJCTx0aGVhZD4KCQkJCQkJCQk8dHI+CgkJCQkJCQkJCTx0aD5JRDwvdGg+CgkJCQkJCQkJCTx0aD51cmw8L3RoPgoJCQkJCQkJCQk8dGg+dGl0bGU8L3RoPgoJCQkJCQkJCQk8dGg+Y21zPC90aD4KCQkJCQkJCQkJPHRoPlNlcnZlcjwvdGg+CgkJCQkJCQkJCTx0aD5zdGF0dXM8L3RoPgoJCQkJCQkJCTwvdHI+CgkJCQkJCQk8L3RoZWFkPgoJCQkJCQkJPHRib2R5PgoJCQkJCQkJCQl7e0ZvY3VzX2Fzc2V0c319CgkJCQkJCQk8L3Rib2R5PgoJCQkJCQk8L3RhYmxlPgoJCQkJCQk8ZGl2PgoJCQkJCQk8L2Rpdj4KCQkJCQk8L2Rpdj4KCQkJCTwvZGl2PgoJCQkJPCEtLSDku7vliqHor6bmg4UgLS0+CgkJCQk8ZGl2PiAKCQkJCQk8ZGl2IGNsYXNzPSJwYW5lbC1oZWFkaW5nIj4KCQkJCQkJPGgzIGNsYXNzPSJwYW5lbC10aXRsZSI+CgkJCQkJCQk8c3BhbiBjbGFzcz0ibGFiZWwgbGFiZWwtaW5mbyI+5YW25LuW6LWE5LqnPC9zcGFuPgoJCQkJCQk8L2gzPgoJCQkJCTwvZGl2PgoJCQkJCTxkaXYgY2xhc3M9InBhbmVsLWJvZHkiPgoJCQkJCQk8dGFibGUgY2xhc3M9InRhYmxlIHRhYmxlLWhvdmVyIj4KCQkJCQkJCTx0aGVhZD4KCQkJCQkJCQk8dHI+CgkJCQkJCQkJCTx0aD5JRDwvdGg+CgkJCQkJCQkJCTx0aD51cmw8L3RoPgoJCQkJCQkJCQk8dGg+dGl0bGU8L3RoPgoJCQkJCQkJCQk8dGg+Y21zPC90aD4KCQkJCQkJCQkJPHRoPlNlcnZlcjwvdGg+CgkJCQkJCQkJCTx0aD5zdGF0dXM8L3RoPgoJCQkJCQkJCTwvdHI+CgkJCQkJCQk8L3RoZWFkPgoJCQkJCQkJPHRib2R5PgoJCQkJCQkJCQl7e2Fzc2V0c319CgkJCQkJCQk8L3Rib2R5PgoJCQkJCQk8L3RhYmxlPgoJCQkJCQk8ZGl2PgoJCQkJCQk8L2Rpdj4KCQkJCQk8L2Rpdj4KCQkJCTwvZGl2PgoJCQkJPCEtLSDmvI/mtJ7or6bmg4UgLS0+CgkJCQk8ZGl2PgoJCQkJCTxoMyBjbGFzcz0iZm9vdGVyLXRpdGxlIj7mnKzns7vnu5/npoHmraLov5vooYzmnKrmjojmnYPjgIHpnZ7ms5XmuJfpgI/mtYvor5U8L2gzPgoJCQkJCTxwPuivt+S9v+eUqOiAhemBteWuiOW9k+WcsOebuOWFs+azleW+i++8jOWLv+eUqOS6jumdnuaOiOadg+a1i+ivle+8jOWmguS9nOS7lueUqOaJgOaJv+WPl+eahOazleW+i+i0o+S7u+S4gOamguS4juS9nOiAheaXoOWFs++8jOS4i+i9veS9v+eUqOWNs+S7o+ihqOS9v+eUqOiAheWQjOaEj+S4iui/sOingueCueOAggoJCQkJCTxici8+CgkJCQkJ6K+m5oOF6K+36K6/6ZeuOiA8YSBocmVmPSJodHRwOi8vd3d3Lm5wYy5nb3YuY24vbnBjL3hpbndlbi8yMDE2LTExLzA3L2NvbnRlbnRfMjAwMTYwNS5odG0iIHRhcmdldD0iX2JsYW5rIj7jgIrkuK3ljY7kurrmsJHlhbHlkozlm73nvZHnu5zlronlhajms5XjgIs8L2E+CgkJCQkJPC9wPgoJCQkJPC9kaXY+CgkJCTwvZGl2PgoJCTwvZGl2PgoJPC9kaXY+CjwvYm9keT4KCgo8L2h0bWw+"
         html = base64.b64decode(html).decode('utf-8')
-        html = html.replace("{{reportTime}}", reportTime)
-        html = html.replace("{{version}}", Version)
         for vaule in Webinfo.result:
-            num = num + 1
-            tr = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>".format(
-                num, vaule["url"], vaule["title"], vaule["cms"], vaule["Server"],vaule["status"], vaule["size"])
-            trs.append(tr)
-        html = html.replace("{{content}}", ''.join(trs))
+            if vaule["cms"]:
+                Focus_num = Focus_num + 1
+                tr = "<tr><td>{0}</td><td><a href='{1}' target ='_blank'>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>".format(
+                    Focus_num, vaule["url"], vaule["title"], vaule["cms"], vaule["Server"], vaule["status"])
+                Focus_assets.append(tr)
+            else:
+                num = num + 1
+                tr = "<tr><td>{0}</td><td><a href='{1}' target ='_blank'>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>".format(
+                    num, vaule["url"], vaule["title"], vaule["cms"], vaule["Server"], vaule["status"])
+                assets.append(tr)
+        html = html.replace("{{Focus_assets}}", ''.join(Focus_assets))
+        html = html.replace("{{assets}}", ''.join(assets))
+        html = html.replace("{{total}}",str(len(Webinfo.result)))
         with open(self.path_html, 'w', encoding='utf-8') as f:
             f.write(html)
         print()

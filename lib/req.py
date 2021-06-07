@@ -5,7 +5,6 @@ import requests
 import random
 import codecs
 import mmh3
-import chardet
 from urllib.parse import urlsplit,urljoin
 from config.data import Urls,Webinfo
 from config import config
@@ -25,14 +24,14 @@ class Request:
 
     def apply(self,url):
         try:
-            proxies = {'http': 'http://127.0.0.1:8080', 'https': 'https://127.0.0.1:8080'}
+            #proxies = {'http': 'http://127.0.0.1:8080', 'https': 'https://127.0.0.1:8080'}
             response = requests.get(url, timeout=5, headers=self.get_headers(), cookies=self.get_cookies(),verify=False,allow_redirects=True)
             self.response(url,response)
         except Exception as e:
             pass
 
     def response(self,url,response):
-        response_content = response.content
+        #response_content = response.content
         response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
         html = response.content.decode(response.encoding)
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
@@ -66,7 +65,6 @@ class Request:
         h1 = soup.h1
         if h1:
             return h1.text
-
         h2 = soup.h2
         if h2:
             return h2.text
@@ -93,18 +91,7 @@ class Request:
         """
         生成伪造请求头
         """
-        user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-            '(KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 '
-            '(KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
-            '(KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/68.0',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) '
-            'Gecko/20100101 Firefox/68.0',
-            'Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/68.0']
-        ua = random.choice(user_agents)
+        ua = random.choice(config.user_agents)
         headers = {
             'Accept': 'text/html,application/xhtml+xml,'
                       'application/xml;q=0.9,*/*;q=0.8',

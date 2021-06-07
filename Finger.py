@@ -6,7 +6,7 @@ from lib.cmdline import cmdline
 from lib.checkenv import CheckEnv
 from lib.req import Request
 from lib.output import Output
-from lib.identify import Identify
+from lib.Fofa import  Fofa
 from lib.options import initoptions
 
 if __name__ == '__main__':
@@ -16,12 +16,8 @@ if __name__ == '__main__':
     check = CheckEnv()
     # 加载参数
     options = initoptions(cmdline())
+    fofa = Fofa()
     run = Request()
-    # # 运行程序
-    # test = Identify()
-    # test.run()
-    # # # 保存数据
-    # dbsave = Save()
     save = Output()
 
 
