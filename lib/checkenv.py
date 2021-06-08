@@ -3,6 +3,10 @@
 # author = EASY
 import platform
 import os
+import time
+import requests
+import hashlib
+from config.config import head,FingerPrint_Update
 from config.data import path,logging
 
 class CheckEnv:
@@ -11,6 +15,8 @@ class CheckEnv:
         self.path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         self.python_check()
         self.path_check()
+        if FingerPrint_Update:
+            self.update()
 
     def python_check(self):
         if self.pyVersion < "3.6":
@@ -33,6 +39,31 @@ class CheckEnv:
             warnMsg = "The output folder is not created, it will be created automatically"
             logging.warning(warnMsg)
             os.mkdir(path.output)
+
+    def update(self):
+        try:
+            is_update = True
+            nowTime = time.strftime("%Y%m%d%H%M%S", time.localtime())
+            logging.info("正在在线更新指纹库。。")
+            Fingerprint_Page = "https://cdn.jsdelivr.net/gh/EASY233/Finger/library/finger.json"
+            response = requests.get(Fingerprint_Page,timeout = 10,headers = head)
+            filepath = os.path.join(path.library,"finger.json")
+            bakfilepath = os.path.join(path.library,"finger_{}.json.bak".format(nowTime))
+            with open(filepath,"rb") as file:
+                if hashlib.md5(file.read()).hexdigest() == hashlib.md5(response.content).hexdigest():
+                    logging.info("指纹库已经是最新")
+                    is_update = False
+            if is_update:
+                logging.info("检查到指纹库有更新,正在同步指纹库。。。")
+                os.rename(filepath,bakfilepath)
+                with open(filepath,"w",encoding="utf-8") as file:
+                    file.write(response.content.decode('utf-8'))
+                with open(filepath,'rb') as file:
+                    Msg = "更新成功！" if hashlib.md5(file.read()).hexdigest() == hashlib.md5(response.content).hexdigest() else "更新失败"
+                    logging.info(Msg)
+        except Exception as e:
+            logging.warning("在线更新指纹库失败！")
+
 
 
 

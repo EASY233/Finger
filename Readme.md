@@ -14,12 +14,12 @@
   <a href="#更新日志">更新日志</a> •
   <a href="#感谢列表">感谢列表</a>
 </p>
-
 <p align="center">
     <img src="https://img.shields.io/badge/Author-EASY-da282a">
     <img src="https://img.shields.io/badge/Language-python3.7-da282a"></a>
-    <img src="https://img.shields.io/badge/Version-V4.1-da282a">
+    <img src="https://img.shields.io/badge/Version-V4.2-da282a">
 </p>
+
 
 
 
@@ -63,6 +63,8 @@ Fofa_email = ""
 Fofa_key = ""
 # 普通会员API查询数据是前100，高级会员是前10000条根据自已的实际情况进行调整。
 Fofa_Size = 100
+# 是否选择在线跟新指纹库，默认为True每次程序都会检查一遍指纹库是否是最新
+FingerPrint_Update = True
 ```
 
 ## 指纹识别规则
@@ -106,7 +108,7 @@ URL批量扫描效果如下:
 
 - [x] 1.对接网络空间搜索引擎
 - [x] 2.优化输出模板样式。
-- [ ] 3.实现在线同步指纹库。
+- [x] 3.实现在线同步指纹库。
 
 ## 更新日志
 
@@ -117,6 +119,11 @@ URL批量扫描效果如下:
 - 修复了不能通过faviconhash进行指纹识别的严重bug
 - 优化了html格式的输出报告
 - 添加了Fofa数据查询功能
+
+### V4.2跟新说明
+
+- 实现了在线同步指纹库功能，每一次运行程序Finger都会首先检查指纹库是否和Github仓库的指纹库md5值是否吻合，若不吻合会自动下载指纹库到本地使用，原来的数据库以finger_时间戳.json.bak的文件样式备份到本地，指纹库由本人维护更新。自动更新指纹库功能可在``config/config.py``关闭。
+- 修复了若干bug。
 
 ## 感谢列表
 在开发过程中参考学习了非常多前辈们的优秀开源项目，特此感谢!

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # author = EASY
 
+import random
 
-Version = "V4.1"
+Version = "V4.2"
 Author = "EASY"
 Website = "https://www.easy233.top"
 Banner = '''\033[1;31m
@@ -30,6 +31,10 @@ Fofa_key = ""
 Fofa_Size = 100
 
 
+# 是否选择在线跟新指纹库，默认为True每次程序都会检查一遍指纹库是否是最新
+FingerPrint_Update = True
+
+
 user_agents = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
             '(KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
@@ -41,3 +46,7 @@ user_agents = [
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) '
             'Gecko/20100101 Firefox/68.0',
             'Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/68.0']
+
+head = {
+    "User-Agent": random.choice(user_agents)
+}
