@@ -35,13 +35,14 @@ class Fofa:
         try:
             response = requests.get(url,timeout=10,headers = self.headers )
             datas = json.loads(response.text)
-            for data in datas["results"]:
-                if "http" == data[0] or "https" == data[0]:
-                    Urls.url.append("{0}://{1}".format(data[0], data[1]))
-                    logging.info("{0}://{1}".format(data[0], data[1]))
-                elif "http" in data[1] or "https" in data[1]:
-                    Urls.url.append(data[1])
-                    logging.info(data[1])
+            if "results" in datas.keys():
+                for data in datas["results"]:
+                    if "http" == data[0] or "https" == data[0]:
+                        Urls.url.append("{0}://{1}".format(data[0], data[1]))
+                        logging.info("{0}://{1}/".format(data[0], data[1]))
+                    elif "http" in data[1] or "https" in data[1]:
+                        Urls.url.append(data[1])
+                        logging.info(data[1])
 
         except requests.exceptions.ReadTimeout:
             logging.error("请求超时")
