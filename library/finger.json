@@ -2983,6 +2983,7 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["static/js/login.1.js", "任务调度中心"]
+
 		}
 	]
 }
