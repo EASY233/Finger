@@ -4,6 +4,8 @@
 import logging
 import sys
 from config.color import color
+from colorama import init as wininit
+wininit(autoreset=True)
 
 # 设置日志等级
 class LoggingLevel:
