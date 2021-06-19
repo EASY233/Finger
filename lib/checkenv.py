@@ -56,8 +56,8 @@ class CheckEnv:
             if is_update:
                 logging.info("检查到指纹库有更新,正在同步指纹库。。。")
                 os.rename(filepath,bakfilepath)
-                with open(filepath,"w",encoding="utf-8") as file:
-                    file.write(response.content.decode('utf-8'))
+                with open(filepath,"wb") as file:
+                    file.write(response.content)
                 with open(filepath,'rb') as file:
                     Msg = "更新成功！" if hashlib.md5(file.read()).hexdigest() == hashlib.md5(response.content).hexdigest() else "更新失败"
                     logging.info(Msg)
