@@ -4,7 +4,7 @@
 
 import random
 
-Version = "V4.2"
+Version = "V4.3"
 Author = "EASY"
 Website = "https://www.easy233.top"
 Banner = '''\033[1;31m
