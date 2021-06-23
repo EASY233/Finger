@@ -25,18 +25,24 @@ class Request:
     def apply(self,url):
         try:
             #proxies = {'http': 'http://127.0.0.1:8080', 'https': 'https://127.0.0.1:8080'}
-            response = requests.get(url, timeout=5, headers=self.get_headers(), cookies=self.get_cookies(),verify=False,allow_redirects=True)
-            self.response(url,response)
+            with requests.get(url, timeout=5, headers=self.get_headers(), cookies=self.get_cookies(),verify=False,allow_redirects=True,stream=True) as response:
+                if int(response.headers.get("content-length",default=1000)) > 100000:
+                    self.response(url,response,True)
+                else:
+                     self.response(url,response)
         except Exception as e:
             pass
 
-    def response(self,url,response):
-        #response_content = response.content
-        response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
-        html = response.content.decode(response.encoding)
+    def response(self,url,response,ignore=False):
+        if ignore:
+            html = ""
+            size  = response.headers.get("content-length",default=1000)
+        else:
+            response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
+            html = response.content.decode(response.encoding)
+            size = len(response.text)
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
         status = response.status_code
-        size = len(response.text)
         Server = response.headers["Server"] if "Server" in response.headers else ""
         faviconhash = self.get_faviconhash(url)
         datas = {"url":url,"title":title,"body":html,"status":status,"Server":Server,"size":size,"header":response.headers,"faviconhash":faviconhash}
