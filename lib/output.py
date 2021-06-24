@@ -14,7 +14,7 @@ class Output:
         self.nowTime = time.strftime("%Y%m%d%H%M%S",time.localtime())
         self.filename_html = self.nowTime + '.html'
         self.filename_json = self.nowTime + '.json'
-        self.filename_xls = self.nowTime + '.xls'
+        self.filename_xls = self.nowTime + '.xlsx'
         self.path_html = os.path.join(path.output,self.filename_html)
         self.path_json = os.path.join(path.output,self.filename_json)
         self.path_xls = os.path.join(path.output,self.filename_xls)
