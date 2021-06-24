@@ -39,6 +39,7 @@ class Request:
             size  = response.headers.get("content-length",default=1000)
         else:
             response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
+            response.encoding = "UTF-8" if response.encoding == None else response.encoding
             html = response.content.decode(response.encoding)
             size = len(response.text)
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
