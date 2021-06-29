@@ -22,7 +22,7 @@ class Output:
             self.outHtml()
         if Save.format == 'json' and Webinfo.result:
             self.outJson()
-        if Save.format == 'xls' and Webinfo.result:
+        if Save.format == 'xlsx' and Webinfo.result:
             self.outXls()
 
     def outHtml(self):

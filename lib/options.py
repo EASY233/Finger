@@ -42,7 +42,7 @@ class initoptions:
 
 
     def output(self):
-        if self.format not in ["html", "json", "xls"]:
+        if self.format not in ["html", "json", "xlsx"]:
             errMsg = "Ouput args is error,eg(html,json,xlsx default:html)"
             logging.error(errMsg)
             exit(0)
