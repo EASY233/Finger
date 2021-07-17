@@ -783,6 +783,18 @@
 			"method": "faviconhash",
 			"location": "body",
 			"keyword": ["-266008933"]
+		},
+		{
+			"cms": "VMware vCenter",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["VMware", "ID_VISDK", "download"]
+		},
+		{
+			"cms": "网心云设备",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["网心云设备", "favicon.png"]
 		}, {
 			"cms": "SAP ID Service: Log On",
 			"method": "faviconhash",
@@ -1963,6 +1975,12 @@
 			"method": "faviconhash",
 			"location": "body",
 			"keyword": ["-587741716"]
+		},
+		{
+			"cms": "Citrix 虚拟桌面",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-1272756243"]
 		}, {
 			"cms": "ARRIS (Network)",
 			"method": "faviconhash",
@@ -2804,7 +2822,7 @@
 			"location": "body",
 			"keyword": ["-1162630024"]
 		},
-	   {
+		{
 			"cms": "JumpServer 堡垒机",
 			"method": "keyword",
 			"location": "body",
@@ -2884,6 +2902,12 @@
 			"method": "faviconhash",
 			"location": "body",
 			"keyword": ["1766699363"]
+		},
+		{
+			"cms": "孚盟云 CRM",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["1533124028"]
 		}, {
 			"cms": "中新金盾信息安全管理系统",
 			"method": "keyword",
@@ -2991,10 +3015,257 @@
 			"keyword": ["static/js/login.1.js", "任务调度中心"]
 		},
 		{
+			"cms": "FastAdmin 框架",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["assets/img/favicon.ico", "bootstrap.min.css", "navbar-toggle"]
+		}, {
+			"cms": "FastAdmin 框架",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["ajax\\/upload", "assets/img/favicon.ico", "fastadmin"]
+		},
+		{
+			"cms": "imo云办公室",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<a title=\"imo云办公室\""]
+		}, {
+			"cms": "imo云办公室",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["高效率网上办公平台", "imo_setup.exe"]
+		}, {
+			"cms": "永中DCS",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>永中文档在线预览DCS</title>", "www.yozodcs.com"]
+		}, {
+			"cms": "JeecgBoot",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["JeecgBoot", "polyfill_"]
+		},
+		{
+			"cms": "金山TimeOn云杀毒",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>TimeOn", "iepngfix/iepngfix_tilebg.js"]
+		}, {
+			"cms": "金山终端安全",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["终端安全系统", "setup/kanclient.exe", "iepngfix/iepngfix_tilebg.js"]
+		},
+		{
+			"cms": "LANMP 默认页面",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>LANMP", "<strong>恭喜", "wdlinux.cn", "本页可删除"]
+		},
+		{
+			"cms": "帆软数据决策系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": [">数据决策系统", "ReportServer?op"]
+		},
+		{
 			"cms": "Nacos",
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["<title>Nacos</title>"]
+		}, {
+			"cms": "中腾OA",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["systemAction", "zt_webframe", "login"]
+		},
+		{
+			"cms": "资产灯塔系统",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["1708240621"]
+		},
+		{
+			"cms": "致远 Analytics Cloud 分析云",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["410106848"]
+		},
+		{
+			"cms": "景云网络防病毒系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["styles/images/logo.png", "login_form", "防病毒"]
+		},
+		{
+			"cms": "GitBook",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["content=\"GitBook", "gitbook"]
+		}, {
+			"cms": "奥联通讯管理平台",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-1356973161"]
+		}, {
+			"cms": "百傲瑞达",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-1169502834"]
+		}, {
+			"cms": "明源云ERP",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-626335361"]
+		}, {
+			"cms": "Solar 网络管理系统",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-1871496583"]
+		}, {
+			"cms": "e-cology 运维管理平台",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-384583337"]
+		},
+		{
+			"cms": "Igenus邮件系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["iGENUS", "login.php", "language"]
+		},
+		{
+			"cms": "网神下一代极速防火墙",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["网神信息技术", "login", "防火墙"]
+		},
+		{
+			"cms": "phpinfo",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>phpinfo", "Virtual Directory Support"]
+		},
+		{
+			"cms": "亿邮邮件系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["eYou", "q=login", "tpl/user"]
+		},
+		{
+			"cms": "华天动力OA",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["OAapp/WebObjects/OAapp.woa", "window.location"]
+		}, {
+			"cms": "JEECMS",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["/r/cms/www", "shortcut icon"]
+		}, {
+			"cms": "Apache Hadoop",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["static/hadoop-st.png", "Cluster"]
+		}, {
+			"cms": "TamronOS IPTV系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["TamronOS", "loginbox", "tamronos.com"]
+		},
+		{
+			"cms": "锐捷 RG-EW1200G",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["锐捷", "/static/img/title.ico", "/js/app"]
+		},
+		{
+			"cms": "WordPress",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["wp-admin", "wp-content/"]
+		}, {
+			"cms": "WordPress",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["wp-", "wp-content/themes/"]
+		},
+		{
+			"cms": "微擎 - 公众平台自助引擎",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["微擎 - 公众平台自助引擎", "www.w7.cc", "login"]
+		},
+		{
+			"cms": "网康科技网关/防火墙",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["5471989"]
+		},
+		{
+			"cms": "ThinkPHP",
+			"method": "keyword",
+			"location": "header",
+			"keyword": ["ThinkPHP"]
+		},
+		{
+			"cms": "SuperMap iServer Web Manager",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["1740191553"]
+		},
+		{
+			"cms": "Jellyfin",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["-2069226242"]
+		},
+		{
+			"cms": "好视通视频会议系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["用户登录", "resources/commonImage/favicon.ico", "login/createQRCode.do"]
+		},
+		{
+			"cms": "百度 ueditor编辑器",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["ueditor.all.js", "UE.getEditor"]
+		},
+		{
+			"cms": "图创图书馆集群管理系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["interlib/common/", "self.location.href"]
+		},
+		{
+			"cms": "H3C Web网管",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["webui", "Web网管用户登录", "china_logo.jpg"]
+		}, {
+			"cms": "H3C ER6300G2",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["ER6300G2", "h3c.com", "login"]
+		}, {
+			"cms": "H3C ER3100",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["ER3100", "h3c.com", "login"]
+		},
+		{
+			"cms": "安恒云堡垒机",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["DBAPPSecurity", "安恒云堡垒机"]
+		},
+		{
+			"cms": "Kyan 监控设备",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["login_files", "platform", "欢迎登陆系统"]
 		}
 	]
 }
