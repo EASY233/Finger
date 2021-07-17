@@ -10,30 +10,15 @@
 			"location": "body",
 			"keyword": ["/seeyon/common/"]
 		}, {
-			"cms": "Spring env",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["servletContextInitParams"]
-		}, {
 			"cms": "微三云管理系统",
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["WSY_logo", "管理系统 MANAGEMENT SYSTEM"]
 		}, {
-			"cms": "Spring env",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["logback"]
-		}, {
 			"cms": "Weblogic",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["Error 404--Not Found"]
-		}, {
-			"cms": "Weblogic",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["Error 403--"]
+			"keyword": ["<TITLE>Error 404--Not Found</TITLE>", "<i>Hypertext Transfer Protocol -- HTTP/1.1</i>"]
 		}, {
 			"cms": "Weblogic",
 			"method": "keyword",
@@ -44,11 +29,12 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["Welcome to Weblogic Application Server"]
-		}, {
+		},
+		{
 			"cms": "Weblogic",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["<i>Hypertext Transfer Protocol -- HTTP/1.1</i>"]
+			"keyword": ["<title>Oracle WebLogic Server 管理控制台</title>"]
 		}, {
 			"cms": "Sangfor SSL VPN",
 			"method": "keyword",
@@ -83,12 +69,7 @@
 			"cms": "泛微云桥 e-Bridge",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["wx.weaver"]
-		}, {
-			"cms": "泛微云桥 e-Bridge",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["e-Bridge"]
+			"keyword": ["content=\"泛微云桥e-Bridge,http://wx.weaver.com.cn\""]
 		},
 		{
 			"cms": "泛微-协同办公OA",
@@ -111,7 +92,7 @@
 			"cms": "Swagger UI",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["Swagger UI"]
+			"keyword": ["/swagger-ui.css", "swagger-ui-bundle.js", "swagger-ui-standalone-preset.js"]
 		}, {
 			"cms": "Ruijie",
 			"method": "keyword",
@@ -137,16 +118,6 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["/images/tongda.ico"]
-		}, {
-			"cms": "通达OA",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["Office Anywhere"]
-		}, {
-			"cms": "通达OA",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["通达OA"]
 		}, {
 			"cms": "深信服 waf",
 			"method": "keyword",
@@ -206,7 +177,7 @@
 			"cms": "启明星辰天清汉马USG防火墙",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["天清汉马USG"]
+			"keyword": ["<title>天清汉马USG防火墙</title>"]
 		}, {
 			"cms": "Jboss",
 			"method": "keyword",
@@ -221,7 +192,7 @@
 			"cms": "宝塔-BT.cn",
 			"method": "keyword",
 			"location": "body",
-			"keyword": ["入口校验失败"]
+			"keyword": ["<title>入口校验失败</title>", "href=\"http://www.bt.cn/bbs\""]
 		}, {
 			"cms": "宝塔-BT.cn",
 			"method": "keyword",
@@ -268,11 +239,6 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["YONYOU NC", "img/logo_small.ico"]
-		}, {
-			"cms": "宝塔-BT.cn",
-			"method": "keyword",
-			"location": "body",
-			"keyword": ["宝塔Linux面板"]
 		}, {
 			"cms": "RabbitMQ",
 			"method": "keyword",
@@ -1766,7 +1732,7 @@
 			"location": "body",
 			"keyword": ["2055322029"]
 		}, {
-			"cms": "Ruijie Networks (Login)",
+			"cms": "锐捷网络-EWEB网管系统",
 			"method": "faviconhash",
 			"location": "body",
 			"keyword": ["-692947551"]
@@ -1780,6 +1746,18 @@
 			"method": "faviconhash",
 			"location": "body",
 			"keyword": ["89321398"]
+		},
+		{
+			"cms": "锐捷 NBR 路由器",
+			"method": "faviconhash",
+			"location": "body",
+			"keyword": ["738520282"]
+		},
+		{
+			"cms": "锐捷 SSLVPN",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["SSLVPN", "rjweb", "login"]
 		}, {
 			"cms": "JAWS Web Server (IP Camera)",
 			"method": "faviconhash",
