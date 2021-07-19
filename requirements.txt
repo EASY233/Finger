@@ -4,4 +4,4 @@ xlsxwriter
 bs4
 lxml
 彩绘
-charted
+
