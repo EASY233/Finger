@@ -53,7 +53,7 @@ class Request:
         try:
             parsed = urlsplit(url)
             url = urljoin(parsed.scheme+"://"+parsed.netloc,"favicon.ico")
-            response = requests.get(url,headers=self.get_headers())
+            response = requests.get(url,headers=self.get_headers(),timeout=5)
             favicon = codecs.encode(response.content, "base64")
             hash = mmh3.hash(favicon)
             return hash
