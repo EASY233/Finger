@@ -151,4 +151,5 @@ URL批量扫描效果如下:
 [OneForAll是一款功能强大的子域收集工具](https://github.com/shmilylty/OneForAll)
 
 感谢**Ti0s** 提供的建议
+[![Stargazers over time](https://starchart.cc/EASY233/Finger.svg)](https://starchart.cc/EASY233/Finger)
 
