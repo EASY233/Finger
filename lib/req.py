@@ -35,6 +35,7 @@ class Request:
                 else:
                     self.response(url, response)
         except Exception as e:
+            #print(e)
             pass
 
     def response(self, url, response, ignore=False):
@@ -44,7 +45,7 @@ class Request:
         else:
             response.encoding = response.apparent_encoding if response.encoding == 'ISO-8859-1' else response.encoding
             response.encoding = "utf-8" if response.encoding is None else response.encoding
-            html = response.content.decode(response.encoding)
+            html = response.content.decode(response.encoding,"ignore")
             size = len(response.text)
         title = self.get_title(html).strip().replace('\r', '').replace('\n', '')
         status = response.status_code

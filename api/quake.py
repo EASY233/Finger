@@ -38,12 +38,13 @@ class Quake:
             datas = json.loads(response.text)
             if len(datas['data']) >= 1 and datas['code'] == 0:
                 for data in datas['data']:
+                    port = "" if data['port'] == 80 or data["port"] == 443 else ":{}".format(str(data['port']))
                     if 'http/ssl' == data['service']['name']:
-                        url = 'https://' + data['service']['http']['host'] + ':' + str(data['port'])
+                        url = 'https://' + data['service']['http']['host'] + port
                         logging.info(url)
                         Urls.url.append(url)
                     elif 'http' == data['service']['name']:
-                        url = 'http://' + data['service']['http']['host'] + ':' + str(data['port'])
+                        url = 'http://' + data['service']['http']['host'] + port
                         logging.info(url)
                         Urls.url.append(url)
         except Exception as e:

@@ -6,6 +6,7 @@ import re
 import json
 from config.data import path
 from config.color import color
+from urllib.parse import urlsplit
 from config.data import logging, Webinfo
 
 
@@ -23,18 +24,23 @@ class Identify:
         self.datas = datas
         cms = self._has_app()
         self.datas["cms"] = ','.join(set(cms))
-        results = {"url": self.datas["url"], "cms": self.datas["cms"], "title": self.datas["title"],
-                   "status": self.datas["status"], "Server": self.datas['Server'],
-                   "size": self.datas["size"], "iscdn": self.datas["iscdn"], "ip": self.datas["ip"],
-                   "address": self.datas["address"], "isp": self.datas["isp"]}
-        if cms:
-            Webinfo.result.insert(0,results)
+        _url = "://{0}".format(urlsplit(self.datas['url']).netloc)  # 添加://降低误报率
+        _webinfo = str(Webinfo.result)
+        if _url in _webinfo and self.datas["title"] in _webinfo:
+            pass
         else:
-            Webinfo.result.append(results)
-        Msg = "{0} {1} {2} {4} {3}".format(color.green(self.datas['cms']),
-                                           color.blue(self.datas['Server']), self.datas['title'],
-                                           color.yellow(self.datas['status']), self.datas["url"])
-        logging.success(Msg)
+            results = {"url": self.datas["url"], "cms": self.datas["cms"], "title": self.datas["title"],
+                       "status": self.datas["status"], "Server": self.datas['Server'],
+                       "size": self.datas["size"], "iscdn": self.datas["iscdn"], "ip": self.datas["ip"],
+                       "address": self.datas["address"], "isp": self.datas["isp"]}
+            if cms:
+                Webinfo.result.insert(0, results)
+            else:
+                Webinfo.result.append(results)
+            Msg = "{0} {1} {2} {4} {3}".format(color.green(self.datas['cms']),
+                                               color.blue(self.datas['Server']), self.datas['title'],
+                                               color.yellow(self.datas['status']), self.datas["url"])
+            logging.success(Msg)
 
     def _prepare_app(self):
         for line in self.obj:
