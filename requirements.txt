@@ -1,7 +1,6 @@
-mmh3
-requests
-xlsxwriter
-bs4
-lxml
-colorama
-ipaddress
+mmh3==3.0.0
+requests==2.25.1
+urllib3==1.26.5
+XlsxWriter==1.4.4
+colorama==0.4.4
+beautifulsoup4==4.10.0
