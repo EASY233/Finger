@@ -45,7 +45,7 @@ class Fofa:
                     elif "http" in data[1] or "https" in data[1]:
                         _url = data[1]
                     elif "" is data[0]:
-                        _urll = "{0}://{1}".format("http", data[1])
+                        _url = "{0}://{1}".format("http", data[1])
                     if _url:
                         logging.info(_url)
                         Urls.url.append(_url)
