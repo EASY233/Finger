@@ -49,7 +49,6 @@ class Fofa:
                     if _url:
                         logging.info(_url)
                         Urls.url.append(_url)
-            print(set(Urls.url))
 
         except requests.exceptions.ReadTimeout:
             logging.error("请求超时")
