@@ -8,6 +8,8 @@ import requests
 from urllib.parse import quote
 from config.data import logging,Urls,Ips
 from config.config import Fofa_key,Fofa_email,Fofa_Size,user_agents
+import readline
+
 
 class Fofa:
     def __init__(self):
@@ -23,8 +25,18 @@ class Fofa:
                     ip = "ip={}".format(ip)
                     self.run(ip)
             else:
-                keyword = input("请输入查询关键词:").strip()
-                self.run(keyword)
+                try:
+                    logging.info("[FOFA Example]domain=example.com\n")
+                    while 1:
+                        keyword = input("请输入查询关键词:").strip()
+                        if keyword == "":
+                            logging.error("\n关键字不能为空！")
+                        else:
+                            break
+                    self.run(keyword)
+                except KeyboardInterrupt:
+                    logging.error("\n用户取消输入！直接退出。")
+                    exit(0)
         else:
             logging.error("fofa api不可用，请检查配置是否正确！")
 
@@ -49,7 +61,6 @@ class Fofa:
                     if _url:
                         logging.info(_url)
                         Urls.url.append(_url)
-
         except requests.exceptions.ReadTimeout:
             logging.error("请求超时")
         except requests.exceptions.ConnectionError:
