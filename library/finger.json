@@ -218,7 +218,14 @@
 			"method": "keyword",
 			"location": "header",
 			"keyword": ["zentaosid"]
-		}, {
+		},
+		{
+			"cms": "金合OA",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["Jhsoft.Web.login","PassWord.aspx"]
+		 },
+		 {
 			"cms": "用友软件",
 			"method": "keyword",
 			"location": "body",
@@ -3244,6 +3251,12 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["login_files", "platform", "欢迎登陆系统"]
+		},
+		{
+			"cms": "Grafana",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["https://grafana.com","public/build/grafana"]
 		}
 	]
 }
