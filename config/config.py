@@ -28,7 +28,6 @@ threads = 30
 Fofa_email = ""
 Fofa_key = ""
 # 普通会员API查询数据是前100，高级会员是前10000条根据自已的实际情况进行调整。
-Fofa_Size = 100
 
 # 设置360quake key信息，每月能免费查询3000条记录
 QuakeKey = ""
