@@ -7,7 +7,7 @@ import random
 import requests
 from urllib.parse import quote
 from config.data import logging,Urls,Ips
-from config.config import Fofa_key,Fofa_email,Fofa_Size,user_agents
+from config.config import Fofa_key,Fofa_email,user_agents
 import readline
 
 
@@ -15,7 +15,7 @@ class Fofa:
     def __init__(self):
         self.email = Fofa_email
         self.key = Fofa_key
-        self.size = Fofa_Size
+        self.size = 100
         self.headers = {
             "User-Agent": random.choice(user_agents)
         }
@@ -29,6 +29,8 @@ class Fofa:
                     logging.info("[FOFA Example]domain=example.com\n")
                     while 1:
                         keyword = input("请输入查询关键词:").strip()
+                        size = input("请输入查询的数量(默认100):").strip()
+                        self.size = int(size) if size else 100
                         if keyword == "":
                             logging.error("\n关键字不能为空！")
                         else:
