@@ -54,10 +54,10 @@ class Fofa:
             if "results" in datas.keys():
                 for data in datas["results"]:
                     _url = ""
-                    if "http" == data[0] or "https" == data[0]:
-                        _url = "{0}://{1}".format(data[0], data[1])
-                    elif "http" in data[1] or "https" in data[1]:
+                    if "http" in data[1] or "https" in data[1]:
                         _url = data[1]
+                    elif "http" == data[0] or "https" == data[0]:
+                        _url = "{0}://{1}".format(data[0], data[1])
                     elif "" == data[0]:
                         _url = "{0}://{1}".format("http", data[1])
                     if _url:
