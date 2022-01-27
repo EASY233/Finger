@@ -46,7 +46,7 @@ class Fofa:
         logging.info("正在调用fofa进行收集资产。。。。")
         logging.info("查询关键词为:{0},查询数量为:{1}".format(keyword,self.size))
         keyword = quote(str(base64.b64encode(keyword.encode()), encoding='utf-8'))
-        url = "https://fofa.so/api/v1/search/all?email={0}&key={1}&qbase64={2}&full=false&fields=protocol,host&size={3}".format(
+        url = "https://fofa.info/api/v1/search/all?email={0}&key={1}&qbase64={2}&full=false&fields=protocol,host&size={3}".format(
             self.email, self.key, keyword, self.size)
         try:
             response = requests.get(url,timeout=10,headers = self.headers )
@@ -76,7 +76,7 @@ class Fofa:
     def check(self):
         try:
             if self.email and self.key:
-                auth_url = "https://fofa.so/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
+                auth_url = "https://fofa.info/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
                 response = requests.get(auth_url, timeout=10, headers=self.headers)
                 if self.email in response.text:
                     return True
