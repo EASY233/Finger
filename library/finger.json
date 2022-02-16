@@ -3257,6 +3257,42 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["https://grafana.com","public/build/grafana"]
+		},
+		{
+			"cms": "黑盾运维安全网关",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>黑盾运维安全网关 HD-SGS V4.0</title>"]
+		},
+		{
+			"cms": "锐取工作流系统",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>深圳锐取工作流系统</title>"]
+		},
+		{
+			"cms": "PMedia Platform OA",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["PMedia Platform","images/login/badgezh_cn.png"]
+		},
+		{
+			"cms": "联达动力协同办公管理平台",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["/LKSys_WindowControlScript.js","LKSYS_PubMaxWin()"]
+		},
+		{
+			"cms": "聚水潭SaaS协同平台",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["Hxj_Web_UI_Script_jquery_json-2_4_js"]
+		},
+		{
+			"cms": "聚水潭SaaS协同平台",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["<title>聚水潭SaaS协同平台登录入口</title>"]
 		}
 	]
 }
