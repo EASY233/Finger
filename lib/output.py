@@ -6,12 +6,13 @@ import time
 import json
 import base64
 import xlsxwriter
-from config.data import path,Webinfo,Save
+from config.data import path,Webinfo,Save,Urlerror
 from config.data import logging
 
 class Output:
     def __init__(self):
         self.nowTime = time.strftime("%Y%m%d%H%M%S",time.localtime())
+        Webinfo.result = Webinfo.result + Urlerror.result
         self.filename_json = self.nowTime + '.json'
         self.filename_xls = self.nowTime + '.xlsx'
         self.path_json = os.path.join(path.output,self.filename_json)
@@ -67,6 +68,7 @@ class Output:
                 worksheet.write(row, col+8, vaule["address"])
                 worksheet.write(row, col+9, vaule["isp"])
                 row = row + 1
+
         print()
         successMsg = "结果文件输出路径为:{0}".format(self.path_xls)
         logging.success(successMsg)
