@@ -55,6 +55,19 @@ http://www.baidu.com(备注)
 
 ![](https://picbed.easy233.top//img20220318141659.png)
 
+**⚠️注意**
+更新后保存为xlsx后打开可能会出现如下问题:
+
+![](https://picbed.easy233.top//img20220318142425.png)
+
+点击进行修复-删除即可
+
+![](https://picbed.easy233.top//img20220318142636.png)
+
+这是因为部分链接不符合url格式导致，**进行修复不会导致任何数据丢失！！**
+
+![](https://picbed.easy233.top//img20220318142544.png)
+
 ### V5.0 版本大更新
 
 - 取消html输出格式，默认使用xlsx格式保存数据，目前只支持xlsx和json保存数据
