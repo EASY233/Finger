@@ -9,6 +9,7 @@ from config.data import Urls, logging, Save, Ips
 
 class initoptions:
     def __init__(self, args):
+        self.key = ["\"","“","”","\\","'"]
         Urls.url = []
         Ips.ip = []
         self._url = args.url
@@ -42,11 +43,14 @@ class initoptions:
                 exit(0)
 
     def check(self, url):
-        if not url.startswith('http'):
+        for key in self.key:
+            if key in url:
+                url = url.replace(key,"")
+        if not url.startswith('http') and url:
             # 若没有http头默认同时添加上http与https到目标上
             Urls.url.append("http://" + str(url))
             Urls.url.append("https://" + str(url))
-        else:
+        elif url:
             Urls.url.append(url)
 
     def output(self):
@@ -98,3 +102,4 @@ class initoptions:
                                 (num & 0x00ff0000) >> 16,
                                 (num & 0x0000ff00) >> 8,
                                 num & 0x000000ff)
+
