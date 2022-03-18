@@ -53,20 +53,20 @@ http://www.baidu.com(备注)
 
 现在会把所有所有失败的请求，以及失败的原因保存在表格的最下面。
 
-![](https://picbed.easy233.top//img20220318141659.png)
+![](./img/5.png)
 
 **⚠️注意**
 更新后保存为xlsx后打开可能会出现如下问题:
 
-![](https://picbed.easy233.top//img20220318142425.png)
+![](./img/8.png)
 
 点击进行修复-删除即可
 
-![](https://picbed.easy233.top//img20220318142636.png)
+![](./img/6.png)
 
 这是因为部分链接不符合url格式导致，**进行修复不会导致任何数据丢失！！**
 
-![](https://picbed.easy233.top//img20220318142544.png)
+![](./img/7.png)
 
 ### V5.0 版本大更新
 
