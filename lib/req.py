@@ -7,7 +7,7 @@ import codecs
 import mmh3
 from lib.IpFactory import IPFactory
 from urllib.parse import urlsplit, urljoin
-from config.data import Urls, Webinfo
+from config.data import Urls, Webinfo,Urlerror
 from config import config
 from lib.identify import Identify
 from bs4 import BeautifulSoup
@@ -20,6 +20,7 @@ from concurrent.futures import ThreadPoolExecutor
 class Request:
     def __init__(self):
         Webinfo.result = []
+        Urlerror.result = []
         self.checkcms = Identify()
         self.ipFactory = IPFactory()
         with ThreadPoolExecutor(config.threads) as pool:
@@ -28,14 +29,22 @@ class Request:
     def apply(self, url):
         try:
             #proxies = { "http": "127.0.0.1:8080","https": "127.0.0.1:8080"}
-            with requests.get(url, timeout=5, headers=self.get_headers(), cookies=self.get_cookies(), verify=False,
+            with requests.get(url, timeout=10, headers=self.get_headers(), cookies=self.get_cookies(), verify=False,
                               allow_redirects=True, stream=True) as response:
                 if int(response.headers.get("content-length", default=1000)) > 100000:
                     self.response(url, response, True)
                 else:
                     self.response(url, response)
+        except KeyboardInterrupt:
+            logger.error("用户强制程序，系统中止!")
+            exit(0)
         except Exception as e:
-            #print(e)
+            results = {"url": str(url), "cms": "-", "title": '-',
+                       "status": "-", "Server": "-",
+                       "size": "-", "iscdn": "-", "ip": "-",
+                       "address": "-", "isp": "-"}
+
+            Urlerror.result.append(results)
             pass
 
     def response(self, url, response, ignore=False):
@@ -114,3 +123,4 @@ class Request:
     def get_cookies(self):
         cookies = {'rememberMe': 'test'}
         return cookies
+
