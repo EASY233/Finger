@@ -11,4 +11,4 @@ Urls = AttribDict()
 Ips = AttribDict()
 Webinfo = AttribDict()
 Save = AttribDict()
-Webinfo.result = {}
+Urlerror = AttribDict()
