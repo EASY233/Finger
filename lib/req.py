@@ -39,7 +39,7 @@ class Request:
             logger.error("用户强制程序，系统中止!")
             exit(0)
         except Exception as e:
-            results = {"url": str(url), "cms": "-", "title": '-',
+            results = {"url": str(url), "cms": "-", "title": str(e),
                        "status": "-", "Server": "-",
                        "size": "-", "iscdn": "-", "ip": "-",
                        "address": "-", "isp": "-"}
