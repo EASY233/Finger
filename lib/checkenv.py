@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author = EASY
-import platform
+import sys
 import os
 import time
 import requests
@@ -11,7 +11,7 @@ from config.data import path,logging
 
 class CheckEnv:
     def __init__(self):
-        self.pyVersion = platform.python_version()
+        self.pyVersion = sys.version_info
         self.path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         self.python_check()
         self.path_check()
@@ -19,8 +19,8 @@ class CheckEnv:
             self.update()
 
     def python_check(self):
-        if self.pyVersion < "3.6":
-            logging.error("此Python版本 ('{0}') 不兼容,成功运行程序你必须使用版本 >= 3.6 (访问 ‘https://www.python.org/downloads/".format(self.pyVersion))
+        if self.pyVersion < (3, 6):
+            logging.error("此Python版本 ('{0}') 不兼容,成功运行程序你必须使用版本 >= 3.6 (访问 ‘https://www.python.org/downloads/".format(self.pyVersion[0]+'.'+self.pyVersion[1]+'.'+self.pyVersion[2]))
             exit(0)
 
     def path_check(self):
