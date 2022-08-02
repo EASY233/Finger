@@ -6,21 +6,26 @@ import os
 import time
 import requests
 import hashlib
-from config.config import head,FingerPrint_Update
-from config.data import path,logging
+from config.config import head, FingerPrint_Update
+from config.data import path, logging
+
 
 class CheckEnv:
+
     def __init__(self):
         self.pyVersion = platform.python_version()
-        self.path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        self.path = os.path.dirname(os.path.dirname(
+            os.path.realpath(__file__)))
         self.python_check()
         self.path_check()
         if FingerPrint_Update:
             self.update()
 
     def python_check(self):
-        if self.pyVersion < "3.6":
-            logging.error("此Python版本 ('{0}') 不兼容,成功运行程序你必须使用版本 >= 3.6 (访问 ‘https://www.python.org/downloads/".format(self.pyVersion))
+        if self.compare_version(self.pyVersion, "3.6") < 1:
+            logging.error(
+                "此Python版本 ('{0}') 不兼容,成功运行程序你必须使用版本 >= 3.6 (访问 ‘https://www.python.org/downloads/"
+                .format(self.pyVersion))
             exit(0)
 
     def path_check(self):
@@ -32,8 +37,8 @@ class CheckEnv:
             logging.error(errMsg)
             exit(0)
         path.home = self.path
-        path.output = os.path.join(self.path,'output')
-        path.config = os.path.join(self.path,'config')
+        path.output = os.path.join(self.path, 'output')
+        path.config = os.path.join(self.path, 'config')
         path.library = os.path.join(self.path, 'library')
         if not os.path.exists(path.output):
             warnMsg = "The output folder is not created, it will be created automatically"
@@ -46,27 +51,42 @@ class CheckEnv:
             nowTime = time.strftime("%Y%m%d%H%M%S", time.localtime())
             logging.info("正在在线更新指纹库。。")
             Fingerprint_Page = "https://cdn.jsdelivr.net/gh/EASY233/Finger/library/finger.json"
-            response = requests.get(Fingerprint_Page,timeout = 10,headers = head)
-            filepath = os.path.join(path.library,"finger.json")
-            bakfilepath = os.path.join(path.library,"finger_{}.json.bak".format(nowTime))
-            with open(filepath,"rb") as file:
-                if hashlib.md5(file.read()).hexdigest() == hashlib.md5(response.content).hexdigest():
+            response = requests.get(Fingerprint_Page, timeout=10, headers=head)
+            filepath = os.path.join(path.library, "finger.json")
+            bakfilepath = os.path.join(path.library,
+                                       "finger_{}.json.bak".format(nowTime))
+            with open(filepath, "rb") as file:
+                if hashlib.md5(file.read()).hexdigest() == hashlib.md5(
+                        response.content).hexdigest():
                     logging.info("指纹库已经是最新")
                     is_update = False
             if is_update:
                 logging.info("检查到指纹库有更新,正在同步指纹库。。。")
-                os.rename(filepath,bakfilepath)
-                with open(filepath,"wb") as file:
+                os.rename(filepath, bakfilepath)
+                with open(filepath, "wb") as file:
                     file.write(response.content)
-                with open(filepath,'rb') as file:
-                    Msg = "更新成功！" if hashlib.md5(file.read()).hexdigest() == hashlib.md5(response.content).hexdigest() else "更新失败"
+                with open(filepath, 'rb') as file:
+                    Msg = "更新成功！" if hashlib.md5(
+                        file.read()).hexdigest() == hashlib.md5(
+                            response.content).hexdigest() else "更新失败"
                     logging.info(Msg)
         except Exception as e:
             logging.warning("在线更新指纹库失败！")
 
-
-
-
-
-
-
+    def compare_version(self, ver1, ver2):
+        list1 = str(ver1).split(".")
+        list2 = str(ver2).split(".")
+        for i in range(len(list1)) if len(list1) < len(list2) else range(
+                len(list2)):
+            if int(list1[i]) == int(list2[i]):
+                pass
+            elif int(list1[i]) < int(list2[i]):
+                return -1
+            else:
+                return 1
+        if len(list1) == len(list2):
+            return 0
+        elif len(list1) < len(list2):
+            return -1
+        else:
+            return 1
