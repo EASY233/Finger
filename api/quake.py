@@ -24,11 +24,10 @@ class Quake:
             logging.info("[QUAKE Example]domain:example.com\n")
             while 1:
                 self.keywords = input("请输入查询关键词:").strip()
-                self.size = input("请输入查询数量:").strip()
+                size = input("请输入查询数量（默认100）:").strip()
+                self.size = int(size) if size else 100
                 if self.keywords == "" or self.size == "":
                     logging.error("\n关键字或查询数量不能为空！")
-                elif self.size.isdigit() != True:
-                    logging.error("\n查询数量非整数！")
                 else:
                     break
             self.run()
