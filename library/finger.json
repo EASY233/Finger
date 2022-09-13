@@ -3293,6 +3293,12 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["<title>聚水潭SaaS协同平台登录入口</title>"]
+		},
+		{
+			"cms": "pbootCms",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["!-- 幻灯片 --", "!--占位导航栏--"]
 		}
 	]
 }

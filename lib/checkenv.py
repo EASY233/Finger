@@ -19,7 +19,7 @@ class CheckEnv:
             self.update()
 
     def python_check(self):
-        if self.pyVersion < "3.6":
+        if self.pyVersion < "3":
             logging.error("此Python版本 ('{0}') 不兼容,成功运行程序你必须使用版本 >= 3.6 (访问 ‘https://www.python.org/downloads/".format(self.pyVersion))
             exit(0)
 
