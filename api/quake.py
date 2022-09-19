@@ -6,7 +6,6 @@ import random
 import requests
 from config.data import Urls, logging
 from config.config import QuakeKey, user_agents
-import readline
 
 
 
