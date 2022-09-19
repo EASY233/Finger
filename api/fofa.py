@@ -8,7 +8,6 @@ import requests
 from urllib.parse import quote
 from config.data import logging,Urls,Ips
 from config.config import Fofa_key,Fofa_email,user_agents,Fofa_Size
-import readline
 
 
 class Fofa:
