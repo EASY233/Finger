@@ -3299,6 +3299,12 @@
 			"method": "keyword",
 			"location": "body",
 			"keyword": ["!-- 幻灯片 --", "!--占位导航栏--"]
+		},		
+		{
+			"cms": "Ruoyi",
+			"method": "keyword",
+			"location": "body",
+			"keyword": ["ruoyi/css/ry-ui.css", "ruoyi/js"]
 		}
 	]
 }
