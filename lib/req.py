@@ -60,7 +60,7 @@ class Request:
         status = response.status_code
         server = response.headers["Server"] if "Server" in response.headers else ""
         server = "" if len(server) > 50 else server
-        faviconhash = self.get_faviconhash(url)
+        faviconhash = self.get_faviconhash(response.url)
         iscdn, iplist = self.ipFactory.factory(url)
         iplist = ','.join(set(iplist))
         datas = {"url": url, "title": title, "body": html, "status": status, "Server": server, "size": size,
