@@ -8,6 +8,7 @@ import requests
 from urllib.parse import quote
 from config.data import logging,Urls,Ips
 from config.config import Fofa_key,Fofa_email,user_agents,Fofa_Size
+import readline
 
 
 class Fofa:
@@ -77,7 +78,8 @@ class Fofa:
             if self.email and self.key:
                 auth_url = "https://fofa.info/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
                 response = requests.get(auth_url, timeout=10, headers=self.headers)
-                if self.email in response.text:
+                print(response.text)
+                if "{\"error\":false" in response.text:
                     return True
                 else:
                     return False
