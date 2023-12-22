@@ -78,7 +78,6 @@ class Fofa:
             if self.email and self.key:
                 auth_url = "https://fofa.info/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
                 response = requests.get(auth_url, timeout=10, headers=self.headers)
-                print(response.text)
                 if "{\"error\":false" in response.text:
                     return True
                 else:
