@@ -1,0 +1,17 @@
+{
+  "url": "http://mail.test/owa/",
+  "title": "Acme Mail",
+  "body": "<!DOCTYPE html><html><head><title>Acme Mail</title></head><body><div>mail portal</div></body></html>",
+  "status": 200,
+  "Server": "nginx/1.24.0",
+  "header": {
+    "Server": "nginx/1.24.0",
+    "X-OWA-Version": "15.2.1258.12",
+    "Location": "/owa/"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

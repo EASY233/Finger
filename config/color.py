@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
+# author = EASY233
 class Colored():
     def __init__(self):
         self.Red = '\033[1;31m'  # 红色

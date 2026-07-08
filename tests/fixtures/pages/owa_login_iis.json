@@ -1,0 +1,17 @@
+{
+  "url": "http://mail.test/owa/",
+  "title": "Outlook Web App",
+  "body": "<!DOCTYPE html><html><head><title>Outlook Web App</title><meta http-equiv=\"refresh\" content=\"0;url=/owa\"></head><body><div class=\"signinheader\">Outlook</div><a href=\"/owa/auth/\">Login</a></body></html>",
+  "status": 200,
+  "Server": "Microsoft-IIS/10.0",
+  "header": {
+    "Server": "Microsoft-IIS/10.0",
+    "X-OWA-Version": "15.2.1258.12",
+    "Location": "/owa/"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

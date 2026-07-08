@@ -1,0 +1,10 @@
+{
+  "url": "https://demo.gitea.com/user/login",
+  "title": "Sign In - Gitea: Git with a cup of tea",
+  "status": 200,
+  "Server": "nginx",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<html lang=\"en\"><head><title>Sign In - Gitea: Git with a cup of tea</title><link rel=\"manifest\" href=\"/assets/site-manifest.json\"><meta name=\"author\" content=\"Gitea - Git with a cup of tea\"><meta name=\"description\" content=\"Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go\"></head><body><footer class=\"page-footer\" role=\"group\" aria-label=\"Footer\"><div class=\"left-links\" role=\"contentinfo\" aria-label=\"About Software\"><a target=\"_blank\" href=\"https://about.gitea.com\">Powered by Gitea</a><span>Version: 1.27.0+dev-492-g9540292596</span></div></footer></body></html>"
+}

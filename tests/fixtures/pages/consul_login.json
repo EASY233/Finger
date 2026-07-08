@@ -1,0 +1,11 @@
+{
+  "url": "https://consul.example.test/ui/",
+  "title": "Consul by HashiCorp",
+  "body": "<div class='auth-form'><span>Log in with a token</span><input name='auth[SecretID]' placeholder='SecretID' value=''><button type='submit'>Log in</button><em>Contact your administrator for login credentials.</em></div><div>Consul login failed</div>",
+  "status": 200,
+  "Server": "Consul",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "Consul"
+  }
+}

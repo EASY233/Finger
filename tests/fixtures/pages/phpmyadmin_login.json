@@ -1,0 +1,11 @@
+{
+  "url": "https://db.example.test/phpmyadmin/",
+  "title": "phpMyAdmin",
+  "status": 200,
+  "Server": "Apache/2.4.58",
+  "header": {
+    "Server": "Apache/2.4.58",
+    "Set-Cookie": "phpMyAdmin=abc123; path=/phpmyadmin/; HttpOnly"
+  },
+  "body": "<html><head><title>phpMyAdmin</title><link rel=\"stylesheet\" href=\"phpmyadmin.css.php\"></head><body><input type=\"password\" name=\"pma_password\"><img src=\"./themes/original/img/logo_right.png\" id=\"imLogo\" alt=\"phpMyAdmin\"></body></html>"
+}

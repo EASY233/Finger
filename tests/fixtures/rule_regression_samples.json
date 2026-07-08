@@ -1,0 +1,321 @@
+[
+  {
+    "name": "example_domain_is_not_product",
+    "data": {
+      "title": "Example Domain",
+      "body": "<html><head><title>Example Domain</title></head><body></body></html>",
+      "Server": "cloudflare",
+      "header": {
+        "Server": "cloudflare"
+      }
+    },
+    "expect_cms_absent": [
+      "0example",
+      "方卡在线(Isite)"
+    ]
+  },
+  {
+    "name": "header_keyword_360_webguard",
+    "data": {
+      "Server": "360wzws",
+      "header": {
+        "Server": "360wzws",
+        "Wzws-Ray": "abc123"
+      }
+    },
+    "expect_cms_contains": [
+      "360-Webguard"
+    ],
+    "expect_confidence_min": 65
+  },
+  {
+    "name": "regex_login_page",
+    "data": {
+      "body": "<form><input name=\"user\"><input name=\"pass\" type=\"password\"></form>",
+      "Server": "nginx/1.24.0",
+      "header": {
+        "Server": "nginx/1.24.0"
+      }
+    },
+    "expect_cms_contains": [
+      "登录页面"
+    ]
+  },
+  {
+    "name": "url_keyword_and_favicon_nacos",
+    "data": {
+      "url": "http://example.test/nacos/",
+      "title": "Nacos v2.3.0",
+      "body": "<html><head><title>Nacos</title></head><body></body></html>",
+      "Server": "nginx/1.24.0",
+      "header": {
+        "Server": "nginx/1.24.0",
+        "Nacos-Server": "yes"
+      },
+      "faviconhash": {
+        "ehole": 13942501,
+        "fofa": 0,
+        "md5": "0"
+      }
+    },
+    "expect_cms_contains": [
+      "Nacos"
+    ],
+    "expect_version_contains": [
+      "Nacos 2.3.0"
+    ]
+  },
+  {
+    "name": "faviconhash_alternate_hash_afterlogic",
+    "data": {
+      "faviconhash": {
+        "ehole": 0,
+        "fofa": 4100175528,
+        "md5": "0"
+      }
+    },
+    "expect_cms_contains": [
+      "AfterLogicWebMail系统"
+    ],
+    "expect_confidence_min": 95
+  },
+  {
+    "name": "faviconhash_md5_tomcat",
+    "data": {
+      "faviconhash": {
+        "ehole": 0,
+        "fofa": 0,
+        "md5": "4644f2d45601037b8423d45e13194c93"
+      }
+    },
+    "expect_cms_contains": [
+      "Apache-Tomcat"
+    ],
+    "expect_confidence_min": 95
+  },
+  {
+    "name": "expected_server_penalty_exchange",
+    "data": {
+      "Server": "nginx/1.24.0",
+      "header": {
+        "Server": "nginx/1.24.0",
+        "X-OWA-Version": "15.2.1258.12",
+        "Location": "/owa/"
+      }
+    },
+    "expect_cms_contains": [
+      "Microsoft-Exchange"
+    ],
+    "expect_cms_confidence": {
+      "Microsoft-Exchange": {
+        "max": 49
+      }
+    }
+  },
+  {
+    "name": "expected_server_match_exchange",
+    "data": {
+      "Server": "Microsoft-IIS/10.0",
+      "header": {
+        "Server": "Microsoft-IIS/10.0",
+        "X-OWA-Version": "15.2.1258.12",
+        "Location": "/owa/"
+      }
+    },
+    "expect_cms_contains": [
+      "Microsoft-Exchange"
+    ],
+    "expect_cms_confidence": {
+      "Microsoft-Exchange": {
+        "min": 60
+      }
+    }
+  },
+  {
+    "name": "version_extract_uptime_kuma",
+    "data": {
+      "title": "Uptime Kuma",
+      "body": "<div class=\"fs-4 fw-bold\">Uptime Kuma</div><div>Version: 2.4.0</div><div class=\"frontend-version\">Frontend Version: 2.4.0</div>",
+      "header": {
+        "Server": "node"
+      },
+      "Server": "node"
+    },
+    "expect_cms_contains": [
+      "Uptime-Kuma"
+    ],
+    "expect_version_contains": [
+      "Uptime-Kuma 2.4.0"
+    ]
+  },
+  {
+    "name": "version_extract_nginx_proxy_manager",
+    "data": {
+      "title": "Nginx Proxy Manager",
+      "body": "<img alt=\"Nginx Proxy Manager\" src=\"/images/logo-text-horizontal-grey.png\"><div class=\"text-center text-secondary mt-3\">v2.15.1</div>",
+      "header": {
+        "Server": "openresty"
+      },
+      "Server": "openresty"
+    },
+    "expect_cms_contains": [
+      "Nginx Proxy Manager"
+    ],
+    "expect_version_contains": [
+      "Nginx Proxy Manager 2.15.1"
+    ]
+  },
+  {
+    "name": "version_extract_opensearch_json",
+    "data": {
+      "body": "{\"version\":{\"distribution\":\"opensearch\",\"number\":\"2.16.0\"},\"tagline\":\"The OpenSearch Project: https://opensearch.org/\"}",
+      "header": {
+        "Server": "OpenSearch"
+      },
+      "Server": "OpenSearch"
+    },
+    "expect_cms_contains": [
+      "OpenSearch"
+    ],
+    "expect_version_contains": [
+      "OpenSearch 2.16.0"
+    ]
+  },
+  {
+    "name": "prometheus_react_shell",
+    "data": {
+      "title": "Prometheus Time Series Collection and Processing Server",
+      "body": "<script>const GLOBAL_AGENT_MODE='false';const GLOBAL_LOOKBACKDELTA='5m';</script><title>Prometheus Time Series Collection and Processing Server</title>",
+      "header": {
+        "Server": "Caddy"
+      },
+      "Server": "Caddy"
+    },
+    "expect_cms_contains": [
+      "Prometheus"
+    ],
+    "expect_confidence_min": 80
+  },
+  {
+    "name": "harbor_shell",
+    "data": {
+      "title": "Harbor",
+      "body": "<title>Harbor</title><harbor-app><div class=\"spinner spinner-lg app-loading app-loading-fixed\">Loading...</div></harbor-app>",
+      "header": {
+        "Content-Type": "text/html"
+      },
+      "Server": ""
+    },
+    "expect_cms_contains": [
+      "Harbor"
+    ]
+  },
+  {
+    "name": "portainer_shell",
+    "data": {
+      "title": "Loading...",
+      "body": "<html ng-app=\"portainer\" data-edition=\"BE\"><meta name=\"author\" content=\"Portainer.io\"/><react-query-dev-tools></react-query-dev-tools><div ui-view=\"content\"></div></html>",
+      "header": {
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "Server": ""
+    },
+    "expect_cms_contains": [
+      "Portainer"
+    ]
+  },
+  {
+    "name": "alibaba_druid_login_shell",
+    "data": {
+      "title": "druid monitor",
+      "body": "<title>druid monitor</title><script>$.namespace(\"druid.login\");$(document).ready(function(){$(\"#loginBtn\").click(druid.login.login);});</script>",
+      "header": {
+        "Server": "nginx/1.24.0"
+      },
+      "Server": "nginx/1.24.0"
+    },
+    "expect_cms_contains": [
+      "Alibaba-Druid"
+    ]
+  },
+  {
+    "name": "alertmanager_real_shell",
+    "data": {
+      "title": "Alertmanager",
+      "body": "<title>Alertmanager</title><script src=\"script.js\"></script><script>var app = Elm.Main.init({flags:{defaultCreator:localStorage.getItem('defaultCreator')}});</script>",
+      "header": {
+        "Server": "Caddy"
+      },
+      "Server": "Caddy"
+    },
+    "expect_cms_contains": [
+      "Alertmanager"
+    ],
+    "expect_confidence_min": 80
+  },
+  {
+    "name": "jupyter_tree_real_shell",
+    "data": {
+      "url": "https://jupyter.example.test/tree",
+      "title": "Home",
+      "body": "<body class=\"jp-ThemedContainer\"><script id=\"jupyter-config-data\" type=\"application/json\">{\"baseUrl\":\"/\",\"notebookPage\":\"tree\"}</script><script>page_config_full.update(notebookPage='tree');</script></body>",
+      "header": {
+        "Server": "TornadoServer/6.4.0"
+      },
+      "Server": "TornadoServer/6.4.0"
+    },
+    "expect_cms_contains": [
+      "Jupyter Notebook"
+    ],
+    "expect_cms_confidence": {
+      "Jupyter Notebook": {
+        "min": 70
+      }
+    }
+  },
+  {
+    "name": "jupyter_lab_path_should_not_hit_notebook",
+    "data": {
+      "url": "https://jupyter.example.test/lab",
+      "title": "Home",
+      "body": "",
+      "header": {
+        "Server": "TornadoServer/6.4.0"
+      },
+      "Server": "TornadoServer/6.4.0"
+    },
+    "expect_cms_contains": [
+      "JupyterLab"
+    ]
+  },
+  {
+    "name": "argocd_login_real_shell",
+    "data": {
+      "title": "Argo CD",
+      "body": "<div class=\"login__text\">Let's get stuff deployed!</div><div class=\"argo__logo\"></div><img src=\"assets/images/argologo.svg\" alt=\"argo\" />",
+      "header": {
+        "Server": "envoy"
+      },
+      "Server": "envoy"
+    },
+    "expect_cms_contains": [
+      "ArgoCD"
+    ],
+    "expect_confidence_min": 80
+  },
+  {
+    "name": "consul_login_real_shell",
+    "data": {
+      "title": "consul by hashicorp",
+      "body": "<span>Log in with a token</span><input name='auth[SecretID]' placeholder='SecretID'><em>Contact your administrator for login credentials.</em>",
+      "header": {
+        "Server": "Consul"
+      },
+      "Server": "Consul"
+    },
+    "expect_cms_contains": [
+      "Consul-HashiCorp"
+    ],
+    "expect_confidence_min": 80
+  }
+]

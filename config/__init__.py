@@ -1,3 +1,4 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
+# author = EASY233
+from config.settings import *

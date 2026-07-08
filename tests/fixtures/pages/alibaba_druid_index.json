@@ -1,0 +1,11 @@
+{
+  "url": "http://druid.example.test/druid/index.html",
+  "title": "Druid Stat Index",
+  "status": 200,
+  "Server": "nginx/1.24.0",
+  "header": {
+    "Server": "nginx/1.24.0",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<!doctype html><html><head><title>Druid Stat Index</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\"/><link href='css/bootstrap.min.css' rel=\"stylesheet\"/><script type=\"text/javascript\" src=\"js/jquery.min.js\"></script><script src=\"js/common.js\" type=\"text/javascript\" charset=\"utf8\"></script></head><body><div class=\"container\"><h3>Stat Index <a href=\"basic.json\" target=\"_blank\" class=\"lang\" langKey=\"ViewJSONAPI\">View JSON API</a></h3><table id=\"dataTable\"><tr><td>Version</td><td id=\"DruidVersion\"></td></tr></table></div><script type=\"text/javascript\">$.namespace(\"druid.index\");druid.index=function(){return{init:function(){druid.common.buildHead(0);this.ajaxRequestForBasicInfo();}}}();$(document).ready(function(){druid.index.init();});</script></body></html>"
+}

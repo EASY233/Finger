@@ -1,0 +1,15 @@
+{
+  "url": "http://printer.test/",
+  "title": "Printer Status",
+  "body": "<!DOCTYPE html><html><head><title>Printer Status</title></head><body><h1>HP LaserJet Pro MFP M428fdw</h1><form method=\"post\" action=\"/hp/device/supplies_status.html\"></form><img src=\"images/logo.gif\" alt=\"Click this Hewlett-Packard logo to open a new browser window, which takes you to the external HP.com Web site.\" /></body></html>",
+  "status": 200,
+  "Server": "Virata-EmWeb/R6_2_1",
+  "header": {
+    "Server": "Virata-EmWeb/R6_2_1"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

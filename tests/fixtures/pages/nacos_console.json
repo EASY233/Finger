@@ -1,0 +1,16 @@
+{
+  "url": "http://example.test/nacos/",
+  "title": "Nacos v2.3.0",
+  "body": "<!DOCTYPE html><html><head><title>Nacos</title></head><body><div>Nacos Console</div></body></html>",
+  "status": 200,
+  "Server": "nginx/1.24.0",
+  "header": {
+    "Server": "nginx/1.24.0",
+    "Nacos-Server": "yes"
+  },
+  "faviconhash": {
+    "ehole": 13942501,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

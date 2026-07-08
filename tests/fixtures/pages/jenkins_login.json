@@ -1,0 +1,12 @@
+{
+  "url": "https://jenkins.example.test/login",
+  "title": "Dashboard [Jenkins]",
+  "status": 200,
+  "Server": "Jetty(10.0.18)",
+  "header": {
+    "Server": "Jetty(10.0.18)",
+    "X-Jenkins": "2.452.2",
+    "X-Hudson": "1.395"
+  },
+  "body": "<html><head><title>Dashboard [Jenkins]</title></head><body><script>var x='jenkins-agent-protocols';</script><div>Jenkins 2.452.2</div></body></html>"
+}

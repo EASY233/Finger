@@ -1,0 +1,11 @@
+{
+  "url": "https://prometheus.example.test/graph",
+  "title": "Prometheus Time Series Collection and Processing Server",
+  "status": 200,
+  "Server": "Caddy",
+  "header": {
+    "Server": "Caddy",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><link rel=\"icon\" type=\"image/svg+xml\" href=\"./favicon.svg\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /><script>const GLOBAL_CONSOLES_LINK='';const GLOBAL_AGENT_MODE='false';const GLOBAL_READY='true';const GLOBAL_LOOKBACKDELTA='5m';</script><title>Prometheus Time Series Collection and Processing Server</title><script type=\"module\" crossorigin src=\"./assets/index-BIl_ZyYU.js\"></script><link rel=\"stylesheet\" crossorigin href=\"./assets/index-B52iUxzs.css\"></head><body><div id=\"root\"></div></body></html>"
+}

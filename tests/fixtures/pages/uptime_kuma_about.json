@@ -1,0 +1,11 @@
+{
+  "url": "http://kuma.example.test/settings/about",
+  "title": "Uptime Kuma",
+  "status": 200,
+  "Server": "node",
+  "header": {
+    "Server": "node",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<html><head><title>Uptime Kuma</title></head><body><div class=\"fs-4 fw-bold\">Uptime Kuma</div><div>Version: 2.4.0</div><div class=\"frontend-version\">Frontend Version: 2.4.0</div></body></html>"
+}

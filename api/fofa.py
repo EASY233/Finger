@@ -1,88 +1,80 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
-import json
 import base64
+import json
 import random
-import requests
 from urllib.parse import quote
-from config.data import logging,Urls,Ips
-from config.config import Fofa_key,Fofa_email,user_agents,Fofa_Size
-import readline
+
+import requests
+
+from config.data import logging
+from lib.runtime import build_proxies
 
 
-class Fofa:
-    def __init__(self):
-        self.email = Fofa_email
-        self.key = Fofa_key
-        self.size = Fofa_Size
-        self.headers = {
-            "User-Agent": random.choice(user_agents)
-        }
-        if self.check():
-            if Ips.ip:
-                for ip in Ips.ip:
-                    ip = "ip={}".format(ip)
-                    self.run(ip)
-            else:
-                try:
-                    logging.info("[FOFA Example]domain=example.com\n")
-                    while 1:
-                        keyword = input("请输入查询关键词:").strip()
-                        size = input("请输入查询的数量(默认100):").strip()
-                        self.size = int(size) if size else 100
-                        if keyword == "":
-                            logging.error("\n关键字不能为空！")
-                        else:
-                            break
-                    self.run(keyword)
-                except KeyboardInterrupt:
-                    logging.error("\n用户取消输入！直接退出。")
-                    exit(0)
-        else:
-            logging.error("fofa api不可用，请检查配置是否正确！")
+class FofaClient:
+    def __init__(self, email, key, default_size=100, proxy_url='', user_agents=None):
+        self.email = email or ''
+        self.key = key or ''
+        self.default_size = default_size
+        self.proxy_url = proxy_url
+        self.user_agents = tuple(user_agents or ())
 
-    def run(self,keyword):
+    def _headers(self):
+        user_agent = random.choice(self.user_agents) if self.user_agents else "Finger/6.0"
+        return {"User-Agent": user_agent}
+
+    def _proxies(self):
+        return build_proxies(self.proxy_url)
+
+    def is_configured(self):
+        return bool(self.email and self.key)
+
+    def validate_credentials(self):
+        if not self.is_configured():
+            raise RuntimeError("FOFA API 未配置，请检查 config/settings.py")
+
+        auth_url = "https://fofa.info/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
+        response = requests.get(auth_url, timeout=10, headers=self._headers(), proxies=self._proxies())
+        if "{\"error\":false" not in response.text:
+            raise RuntimeError("FOFA API 不可用，请检查配置是否正确")
+
+    def search_web_assets(self, query, size=None):
+        self.validate_credentials()
+        size = size or self.default_size
         logging.info("正在调用fofa进行收集资产。。。。")
-        logging.info("查询关键词为:{0},查询数量为:{1}".format(keyword,self.size))
-        keyword = quote(str(base64.b64encode(keyword.encode()), encoding='utf-8'))
-        url = "https://fofa.info/api/v1/search/all?email={0}&key={1}&qbase64={2}&full=false&fields=protocol,host&size={3}".format(
-            self.email, self.key, keyword, self.size)
+        logging.info("查询关键词为:{0},查询数量为:{1}".format(query, size))
+        keyword = quote(str(base64.b64encode(query.encode()), encoding='utf-8'))
+        url = (
+            "https://fofa.info/api/v1/search/all?email={0}&key={1}&qbase64={2}"
+            "&full=false&fields=protocol,host&size={3}"
+        ).format(self.email, self.key, keyword, size)
+        response = requests.get(url, timeout=10, headers=self._headers(), proxies=self._proxies())
         try:
-            response = requests.get(url,timeout=10,headers = self.headers )
-            datas = json.loads(response.text)
-            if "results" in datas.keys():
-                for data in datas["results"]:
-                    _url = ""
-                    if "http" in data[1] or "https" in data[1]:
-                        _url = data[1]
-                    elif "http" == data[0] or "https" == data[0]:
-                        _url = "{0}://{1}".format(data[0], data[1])
-                    elif "" == data[0]:
-                        _url = "{0}://{1}".format("http", data[1])
-                    if _url:
-                        logging.info(_url)
-                        Urls.url.append(_url)
-        except requests.exceptions.ReadTimeout:
-            logging.error("请求超时")
-        except requests.exceptions.ConnectionError:
-            logging.error("网络超时")
-        except json.decoder.JSONDecodeError:
-            logging.error("获取失败，请重试")
-        except:
-            logging.error("获取失败")
-            pass
+            data = json.loads(response.text)
+        except json.decoder.JSONDecodeError as exc:
+            raise RuntimeError("FOFA 响应解析失败") from exc
+        return self._extract_urls(data)
 
-    def check(self):
-        try:
-            if self.email and self.key:
-                auth_url = "https://fofa.info/api/v1/info/my?email={0}&key={1}".format(self.email, self.key)
-                response = requests.get(auth_url, timeout=10, headers=self.headers)
-                if "{\"error\":false" in response.text:
-                    return True
-                else:
-                    return False
+    def search_ip_web_assets(self, ip_targets, size=None):
+        urls = []
+        for ip in ip_targets:
+            urls.extend(self.search_web_assets("ip={0}".format(ip), size=size))
+        return urls
+
+    @staticmethod
+    def _extract_urls(payload):
+        urls = []
+        for item in payload.get("results", []):
+            protocol = item[0]
+            host = item[1]
+            if "http" in host or "https" in host:
+                url = host
+            elif protocol in ("http", "https"):
+                url = "{0}://{1}".format(protocol, host)
+            elif protocol == "":
+                url = "http://{0}".format(host)
             else:
-                return False
-        except:
-            return False
+                continue
+            logging.info(url)
+            urls.append(url)
+        return urls

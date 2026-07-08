@@ -1,105 +1,133 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
 import os
-from api.fofa import Fofa
-from api.quake import Quake
-from config.data import Urls, logging, Save, Ips
+
+from lib.runtime import create_runtime_config
+
+
+class OptionError(ValueError):
+    pass
+
+
+def _read_lines(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
+        return [line.strip() for line in file if line.strip()]
+
+
+def _clean_target(value):
+    for token in ['"', '“', '”', '\\', "'"]:
+        value = value.replace(token, "")
+    return value.strip()
+
+
+def normalize_urls(values):
+    results = []
+    for value in values:
+        url = _clean_target(value)
+        if not url:
+            continue
+        if url.startswith('http://') or url.startswith('https://'):
+            results.append(url)
+        else:
+            results.append("http://" + url)
+            results.append("https://" + url)
+    return results
+
+
+def expand_ip_targets(values):
+    targets = []
+    for value in values:
+        item = value.strip()
+        if not item:
+            continue
+        if "-" in item and "/" not in item:
+            start, end = [ip_num(x) for x in item.split('-')]
+            targets.extend(num_ip(num) for num in range(start, end + 1) if num & 0xff)
+        else:
+            targets.append(item)
+    return targets
+
+
+def collect_url_targets(args):
+    values = []
+    if args.url:
+        values.append(args.url)
+    if args.file:
+        if not os.path.exists(args.file):
+            raise OptionError("File {0} is not find".format(args.file))
+        values.extend(_read_lines(args.file))
+    return normalize_urls(values)
+
+
+def collect_ip_targets(args):
+    values = []
+    if args.ip:
+        values.append(args.ip)
+    if args.ipfile:
+        if not os.path.exists(args.ipfile):
+            raise OptionError("File {0} is not find".format(args.ipfile))
+        values.extend(_read_lines(args.ipfile))
+    try:
+        return expand_ip_targets(values)
+    except Exception as exc:
+        raise OptionError(
+            "IP格式有误，正确格式为192.168.10.1,192.168.10.1/24 or 192.168.10.10-192.168.10.50"
+        ) from exc
+
+
+def resolve_api_provider(args):
+    if args.fofa and args.quake:
+        raise OptionError("FOFA 和 Quake 只能选择一个")
+    if args.fofa:
+        return "fofa"
+    if args.quake:
+        return "quake"
+    return ""
+
+
+def build_run_config(args, root_dir=None):
+    output_format = args.output.lower().strip()
+    if output_format not in ("json", "xlsx"):
+        raise OptionError("Ouput args is error,eg(json,xlsx default:xlsx)")
+
+    api_provider = resolve_api_provider(args)
+    urls = collect_url_targets(args)
+    ip_targets = collect_ip_targets(args)
+
+    if api_provider and not args.api_query and not ip_targets:
+        raise OptionError("使用 FOFA/Quake 时必须提供 --query，除非通过 -i/-if 使用 FOFA 的 IP 资产采集")
+    if args.api_size is not None and args.api_size <= 0:
+        raise OptionError("--size 必须为正整数")
+
+    return create_runtime_config(
+        root_dir=root_dir,
+        output_format=output_format,
+        proxy_url=args.proxy.strip(),
+        cdn=args.cdn,
+        geo=args.geo,
+        audit=args.audit,
+        api_provider=api_provider,
+        api_query=args.api_query.strip(),
+        api_size=args.api_size,
+        urls=tuple(urls),
+        ip_targets=tuple(ip_targets),
+    )
 
 
 class initoptions:
-    def __init__(self, args):
-        self.key = ["\"","“","”","\\","'"]
-        Urls.url = []
-        Ips.ip = []
-        self._url = args.url
-        self._file = args.file
-        self._ip = args.ip
-        self._ipfile = args.ipfile
-        self.format = args.output
-        # 查询顺序非常重要不能随便移动位置
-        self.api_data(args)
-        self.target()
-        self.output()
-        self.get_ip()
+    """兼容旧接口；新代码请直接使用 build_run_config。"""
 
-    def api_data(self, args):
-        if args.fofa:
-            run = Fofa()
-        elif args.quake:
-            run = Quake()
+    def __init__(self, args, root_dir=None):
+        self.config = build_run_config(args, root_dir=root_dir)
 
-    def target(self):
-        if self._url:
-            self.check(self._url)
-        elif self._file:
-            if os.path.exists(self._file):
-                with open(self._file, 'r') as f:
-                    for i in f:
-                        self.check(i.strip())
-            else:
-                errMsg = "File {0} is not find".format(self._file)
-                logging.error(errMsg)
-                exit(0)
 
-    def check(self, url):
-        for key in self.key:
-            if key in url:
-                url = url.replace(key,"")
-        if not url.startswith('http') and url:
-            # 若没有http头默认同时添加上http与https到目标上
-            Urls.url.append("http://" + str(url))
-            Urls.url.append("https://" + str(url))
-        elif url:
-            Urls.url.append(url)
+def ip_num(ip):
+    item = [int(x) for x in ip.split('.')]
+    return item[0] << 24 | item[1] << 16 | item[2] << 8 | item[3]
 
-    def output(self):
-        if self.format not in ["json", "xlsx"]:
-            errMsg = "Ouput args is error,eg(json,xlsx default:xlsx)"
-            logging.error(errMsg)
-            exit(0)
-        Save.format = self.format
 
-    def get_ip(self):
-        try:
-            if self._ip:
-                if "-" in self._ip:
-                    start, end = [self.ip_num(x) for x in self._ip.split('-')]
-                    iplist = [self.num_ip(num) for num in range(start, end + 1) if num & 0xff]
-                    for ip in iplist:
-                        Ips.ip.append(ip)
-                else:
-                    Ips.ip.append(self._ip)
-            elif self._ipfile:
-                if os.path.exists(self._ipfile):
-                    with open(self._ipfile, 'r') as file:
-                        for i in file:
-                            i = i.strip()
-                            if "-" in i:
-                                start, end = [self.ip_num(x) for x in i.split('-')]
-                                iplist = [self.num_ip(num) for num in range(start, end + 1) if num & 0xff]
-                                for ip in iplist:
-                                    Ips.ip.append(ip)
-                            else:
-                                Ips.ip.append(i)
-                else:
-                    errMsg = "File {0} is not find".format(self._ipfile)
-                    logging.error(errMsg)
-                    exit(0)
-            if Ips.ip:
-                run = Fofa()
-        except Exception as e:
-            logging.error(e)
-            logging.error("IP格式有误，正确格式为192.168.10.1,192.168.10.1/24 or 192.168.10.10-192.168.10.50")
-            exit(0)
-
-    def ip_num(self, ip):
-        ip = [int(x) for x in ip.split('.')]
-        return ip[0] << 24 | ip[1] << 16 | ip[2] << 8 | ip[3]
-
-    def num_ip(self, num):
-        return '%s.%s.%s.%s' % ((num & 0xff000000) >> 24,
-                                (num & 0x00ff0000) >> 16,
-                                (num & 0x0000ff00) >> 8,
-                                num & 0x000000ff)
-
+def num_ip(num):
+    return '%s.%s.%s.%s' % ((num & 0xff000000) >> 24,
+                            (num & 0x00ff0000) >> 16,
+                            (num & 0x0000ff00) >> 8,
+                            num & 0x000000ff)

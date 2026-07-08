@@ -1,0 +1,11 @@
+{
+  "url": "https://argocd.example.test/login",
+  "title": "Argo CD",
+  "body": "<!DOCTYPE html><html><head><title>Argo CD</title></head><body><div class=\"login\"><div class=\"login__content\"><div class=\"login__text\">Let's get stuff deployed!</div><div class=\"argo__logo\"></div></div><div class=\"login__box\"><button class=\"argo-button argo-button--base argo-button--full-width argo-button--xlg\"><span>SSO Login</span></button><button class=\"argo-button argo-button--full-width argo-button--xlg\" type=\"submit\">Sign In</button><img class=\"logo-image\" src=\"assets/images/argologo.svg\" alt=\"argo\" /></div></div></body></html>",
+  "status": 200,
+  "Server": "envoy",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "envoy"
+  }
+}

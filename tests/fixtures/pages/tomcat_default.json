@@ -1,0 +1,15 @@
+{
+  "url": "http://tomcat.test/",
+  "title": "Apache Tomcat/9.0.80",
+  "body": "<!DOCTYPE html><html><head><title>Apache Tomcat/9.0.80</title></head><body><h1>It works!</h1></body></html>",
+  "status": 200,
+  "Server": "Apache-Coyote/1.1",
+  "header": {
+    "Server": "Apache-Coyote/1.1"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "4644f2d45601037b8423d45e13194c93"
+  }
+}

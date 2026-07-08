@@ -1,0 +1,15 @@
+{
+  "url": "http://example.test",
+  "title": "Example Domain",
+  "body": "<!DOCTYPE html><html><head><title>Example Domain</title></head><body><div><h1>Example Domain</h1></div></body></html>",
+  "status": 200,
+  "Server": "cloudflare",
+  "header": {
+    "Server": "cloudflare"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

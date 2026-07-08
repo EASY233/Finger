@@ -1,0 +1,11 @@
+{
+  "url": "https://mq.example.test/",
+  "title": "RabbitMQ Management",
+  "status": 200,
+  "Server": "Cowboy",
+  "header": {
+    "Server": "Cowboy",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<html><head><title>RabbitMQ Management</title></head><body><h1>RabbitMQ Management 3.13.1</h1></body></html>"
+}

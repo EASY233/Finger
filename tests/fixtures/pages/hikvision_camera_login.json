@@ -1,0 +1,16 @@
+{
+  "url": "http://cam.test/doc/page/login.asp",
+  "title": "Network Camera",
+  "body": "<!DOCTYPE html><html><head><title>Network Camera</title><link rel=\"icon\" href=\"/favicon.ico\"><link rel=\"stylesheet\" href=\"/ui/css/ui.css?version=20240601\"></head><body><script>var sysLanguage = navigator.browserLanguage.toLowerCase(); var szLanguage = sysLanguage.substring(0,2);</script><div id=\"divAnonymous\"></div><div id=\"divPswStrength\"></div><form action=\"/goform/formCobraLogin\"></form><object classid=\"clsid:f030f48f-cd67-45d1-b622-a5d88a7bcfe9\" id=\"HCNetVideo\"></object><span>DS-2CD2143G2-IU</span></body></html>",
+  "status": 200,
+  "Server": "App-webs/2.0",
+  "header": {
+    "Server": "App-webs/2.0",
+    "Set-Cookie": "_goaheadwebSessionId=1"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "89b932fcc47cf4ca3faadb0cfdef89cf"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "url": "https://grafana.example.test/login",
+  "title": "Grafana",
+  "status": 200,
+  "Server": "nginx/1.24.0",
+  "header": {
+    "Server": "nginx/1.24.0",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<!doctype html><html><head><title>Grafana</title><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta name=\"application-name\" content=\"Grafana\"><script>performance.mark('frontend_boot_css_time_seconds');</script><script>window.grafanaBootData = {\"settings\":{\"buildInfo\":{\"version\":\"10.4.2\"}},\"autoLoginRedirectUrl\":\"/login\"};</script></head><body><div class=\"grafana-app\">Welcome to Grafana</div><script src=\"public/build/grafana.dark.js\"></script></body></html>"
+}

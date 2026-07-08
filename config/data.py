@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
+# author = EASY233
 from config.datatype import AttribDict
 from config.log import MY_LOGGER
 
@@ -12,3 +12,5 @@ Ips = AttribDict()
 Webinfo = AttribDict()
 Save = AttribDict()
 Urlerror = AttribDict()
+Proxy = AttribDict()
+Extra = AttribDict()

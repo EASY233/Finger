@@ -1,0 +1,11 @@
+{
+  "url": "http://dashboards.example.test/login",
+  "title": "OpenSearch Dashboards",
+  "status": 200,
+  "Server": "OpenSearch Dashboards",
+  "header": {
+    "Server": "OpenSearch Dashboards",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<html><head><title>OpenSearch Dashboards</title></head><body><div class=\"application\">Welcome</div><div>OpenSearch Dashboards 3.8.0</div></body></html>"
+}

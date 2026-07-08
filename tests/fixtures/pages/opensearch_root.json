@@ -1,0 +1,11 @@
+{
+  "url": "http://opensearch.example.test/",
+  "title": "",
+  "status": 200,
+  "Server": "OpenSearch",
+  "header": {
+    "Server": "OpenSearch",
+    "Content-Type": "application/json"
+  },
+  "body": "{\"name\":\"node-1\",\"cluster_name\":\"docker-cluster\",\"cluster_uuid\":\"abc123\",\"version\":{\"distribution\":\"opensearch\",\"number\":\"2.16.0\",\"build_type\":\"tar\",\"build_hash\":\"deadbeef\"},\"tagline\":\"The OpenSearch Project: https://opensearch.org/\"}"
+}

@@ -1,0 +1,11 @@
+{
+  "url": "https://casdoor.example.test/",
+  "title": "Casdoor",
+  "body": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\" /><meta name=\"description\" content=\"Casdoor - An Identity and Access Management (IAM) / Single-Sign-On (SSO) platform with web UI supporting OAuth 2.0, OIDC, SAML and CAS\" /><link rel=\"manifest\" href=\"https://cdn.casbin.org/site/casdoor/manifest.json\" /><title>Casdoor</title></head><body><div id=\"root\"></div></body></html>",
+  "status": 200,
+  "Server": "nginx",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "nginx"
+  }
+}

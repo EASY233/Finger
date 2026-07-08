@@ -1,64 +1,76 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
 import json
 import random
+
 import requests
-from config.data import Urls, logging
-from config.config import QuakeKey, user_agents
+
+from config.data import logging
+from lib.runtime import build_proxies
 
 
+class QuakeClient:
+    def __init__(self, token, proxy_url='', user_agents=None):
+        self.token = token or ''
+        self.proxy_url = proxy_url
+        self.user_agents = tuple(user_agents or ())
 
-class Quake:
-    def __init__(self):
-        self.headers = {
-            "User-Agent": random.choice(user_agents),
-            "X-QuakeToken": QuakeKey
+    def _headers(self):
+        user_agent = random.choice(self.user_agents) if self.user_agents else "Finger/6.0"
+        return {
+            "User-Agent": user_agent,
+            "X-QuakeToken": self.token,
         }
-        if QuakeKey == "":
-            logging.warning("请先在config/config.py文件中配置quake的api")
-            exit(0)
-        
-        try:
-            logging.info("[QUAKE Example]domain:example.com\n")
-            while 1:
-                self.keywords = input("请输入查询关键词:").strip()
-                self.size = input("请输入查询数量:").strip()
-                if self.keywords == "" or self.size == "":
-                    logging.error("\n关键字或查询数量不能为空！")
-                elif self.size.isdigit() != True:
-                    logging.error("\n查询数量非整数！")
-                else:
-                    break
-            self.run()
-        except KeyboardInterrupt:
-            logging.error("\n用户取消输入！直接退出。")
-            exit(0)
-    
 
-    def run(self):
+    def _proxies(self):
+        return build_proxies(self.proxy_url)
+
+    def validate_credentials(self):
+        if not self.token:
+            raise RuntimeError("请先在config/settings.py文件中配置quake的api")
+
+    def search_web_assets(self, query, size):
+        self.validate_credentials()
+        if not query:
+            raise RuntimeError("Quake 查询必须提供 --query")
+        if not size:
+            raise RuntimeError("Quake 查询必须提供 --size")
+
         logging.info("正在使用使用360 Quake进行资产收集。。。")
-        logging.info("查询关键词为:{0},查询数量为:{1}".format(self.keywords, self.size))
-        self.data = {
-            "query": self.keywords,
+        logging.info("查询关键词为:{0},查询数量为:{1}".format(query, size))
+        data = {
+            "query": query,
             "start": 0,
-            "size": self.size
+            "size": size,
         }
+        response = requests.post(
+            url="https://quake.360.cn/api/v3/search/quake_service",
+            headers=self._headers(),
+            json=data,
+            timeout=10,
+            proxies=self._proxies(),
+        )
         try:
-            response = requests.post(url="https://quake.360.cn/api/v3/search/quake_service", headers=self.headers,
-                                     json=self.data, timeout=10)
-            datas = json.loads(response.text)
-            if len(datas['data']) >= 1 and datas['code'] == 0:
-                for data in datas['data']:
-                    port = "" if data['port'] == 80 or data["port"] == 443 else ":{}".format(str(data['port']))
-                    if 'http/ssl' == data['service']['name']:
-                        url = 'https://' + data['service']['http']['host'] + port
-                        logging.info(url)
-                        Urls.url.append(url)
-                    elif 'http' == data['service']['name']:
-                        url = 'http://' + data['service']['http']['host'] + port
-                        logging.info(url)
-                        Urls.url.append(url)
-        except Exception as e:
-            logging.error("获取失败")
-            pass
+            payload = json.loads(response.text)
+        except json.decoder.JSONDecodeError as exc:
+            raise RuntimeError("Quake 响应解析失败") from exc
+        return self._extract_urls(payload)
+
+    @staticmethod
+    def _extract_urls(payload):
+        urls = []
+        if payload.get('code') != 0:
+            raise RuntimeError("360 Quake API 查询失败: {0}".format(payload.get('message', 'unknown error')))
+
+        for item in payload.get('data', []):
+            port = "" if item['port'] in (80, 443) else ":{}".format(str(item['port']))
+            service_name = item['service']['name']
+            if service_name == 'http/ssl':
+                url = 'https://' + item['service']['http']['host'] + port
+            elif service_name == 'http':
+                url = 'http://' + item['service']['http']['host'] + port
+            else:
+                continue
+            logging.info(url)
+            urls.append(url)
+        return urls

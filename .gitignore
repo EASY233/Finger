@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project output
+output/
+*.xlsx
+*.csv
+*.bak
+library/finger.json.backup-*
+
+# OS
+.DS_Store
+Thumbs.db

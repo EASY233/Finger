@@ -1,0 +1,11 @@
+{
+  "url": "https://alertmanager.example.test/",
+  "title": "Alertmanager",
+  "body": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Alertmanager</title></head><body><script src=\"script.js\"></script><script>var app = Elm.Main.init({flags:{production:true,defaultCreator:localStorage.getItem('defaultCreator')}});app.ports.persistDefaultCreator.subscribe(function(name){localStorage.setItem('defaultCreator', name);});</script></body></html>",
+  "status": 200,
+  "Server": "Caddy",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "Caddy"
+  }
+}

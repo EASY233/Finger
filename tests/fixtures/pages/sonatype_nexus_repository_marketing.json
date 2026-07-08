@@ -1,0 +1,19 @@
+{
+  "url": "https://www.sonatype.com/products/sonatype-nexus-repository",
+  "title": "Sonatype Nexus Repository | A Leading Artifact Repository",
+  "body": "<!doctype html><html lang=\"en-us\"><head><meta charset=\"utf-8\"><title>Sonatype Nexus Repository | A Leading Artifact Repository</title><meta name=\"description\" content=\"Centrally manage software artifacts and AI models with Sonatype Nexus Repository.\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css\"><script>window.dataLayer=[];</script></head><body><header class=\"theme-navigation\"><a href=\"/products/sonatype-nexus-repository\">Nexus Repository</a></header><main><h1>Sonatype Nexus Repository</h1><p>Integrates with GitLab CI/CD and many DevOps platforms.</p><p>Read report and guide AI coding assistants with open source intelligence.</p><p>Manage software artifacts and AI models with an artifact repository.</p></main></body></html>",
+  "status": 200,
+  "Server": "cloudflare",
+  "header": {
+    "Server": "cloudflare",
+    "Content-Type": "text/html",
+    "Link": "<https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css>; rel=preload; as=style, <https://www.sonatype.com/theme.css>; rel=preload; as=style",
+    "Set-Cookie": "hubspotutk=abc; HttpOnly; Secure; SameSite=None",
+    "Content-Security-Policy": "connect-src https://*.amazonaws.com https://*.hotjar.io https://*.linkedin.com https://use.typekit.net"
+  },
+  "faviconhash": {
+    "ehole": 0,
+    "fofa": 0,
+    "md5": "0"
+  }
+}

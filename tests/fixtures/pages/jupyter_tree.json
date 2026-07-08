@@ -1,0 +1,11 @@
+{
+  "url": "https://jupyter.example.test/tree?token=test",
+  "title": "Home",
+  "body": "<!DOCTYPE html><html><head><title>Home</title><link rel=\"icon\" type=\"image/x-icon\" href=\"/static/favicons/favicon.ico\" class=\"favicon\" /></head><body class=\"jp-ThemedContainer\"><script id=\"jupyter-config-data\" type=\"application/json\">{\"baseUrl\":\"/\",\"notebookPage\":\"tree\"}</script><script>page_config_full.update(notebookPage='tree');</script></body></html>",
+  "status": 200,
+  "Server": "TornadoServer/6.4.0",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "TornadoServer/6.4.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "url": "https://cockpit.example.test/cockpit",
+  "title": "Loading...",
+  "body": "<!DOCTYPE html><html><head><title>Loading...</title><script type=\"text/javascript\" src=\"cockpit/static/login.js\"></script><link href=\"cockpit/static/login.css\" rel=\"stylesheet\" /><link href=\"cockpit/static/branding.css\" rel=\"stylesheet\" /></head><body class=\"login-pf\"><span class=\"noscript\">Please enable JavaScript to use the Web Console.</span><label for=\"login-user-input\">User name</label><label for=\"login-password-input\">Password</label></body></html>",
+  "status": 200,
+  "Server": "Cockpit Web Service",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "Cockpit Web Service"
+  }
+}

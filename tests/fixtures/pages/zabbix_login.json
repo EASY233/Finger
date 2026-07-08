@@ -1,0 +1,11 @@
+{
+  "url": "https://zabbix.example.test/",
+  "title": "Zabbix",
+  "status": 200,
+  "Server": "nginx/1.22.1",
+  "header": {
+    "Server": "nginx/1.22.1",
+    "Set-Cookie": "zbx_sessionid=xyz123; HttpOnly; Path=/"
+  },
+  "body": "<html><head><title>Zabbix</title><meta name=\"author\" content=\"Zabbix SIA\"></head><body><div>Zabbix 7.0.0</div><img src=\"images/general/zabbix.ico\"></body></html>"
+}

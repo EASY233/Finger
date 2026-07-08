@@ -1,0 +1,10 @@
+{
+  "url": "https://portainer.example.test/",
+  "title": "Loading...",
+  "status": 200,
+  "Server": "",
+  "header": {
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "body": "<!doctype html><html lang=\"en\" ng-app=\"portainer\" ng-strict-di data-edition=\"BE\"><head><meta charset=\"utf-8\"/><title>Loading...</title><meta name=\"description\" content=\"\"/><meta name=\"author\" content=\"Portainer.io\"/><meta http-equiv=\"cache-control\" content=\"no-cache\"/><meta http-equiv=\"expires\" content=\"0\"/><meta http-equiv=\"pragma\" content=\"no-cache\"/><meta name=\"robots\" content=\"noindex\"/><base id=\"base\"/><meta name=\"theme-color\" content=\"#ffffff\"/></head><body ng-controller=\"MainController\"><react-query-dev-tools></react-query-dev-tools><div id=\"page-wrapper\"><div id=\"content-wrapper\"><div class=\"page-content\"><div class=\"page-wrapper\" ng-if=\"applicationState.loading\"><div class=\"mt-8\">Loading...</div></div><div id=\"view\" ui-view=\"content\" ng-if=\"!applicationState.loading\"></div></div></div></div></body></html>"
+}

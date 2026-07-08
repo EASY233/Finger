@@ -1,0 +1,191 @@
+[
+  {
+    "name": "example_domain",
+    "page": "example_domain.json",
+    "expect_cms_absent": ["0example", "Nginx", "Apache", "PHP"]
+  },
+  {
+    "name": "nacos_console",
+    "page": "nacos_console.json",
+    "expect_cms_contains": ["Nacos"],
+    "expect_version_contains": ["Nacos 2.3.0"]
+  },
+  {
+    "name": "owa_login_iis",
+    "page": "owa_login_iis.json",
+    "expect_cms_contains": ["Microsoft-Exchange"],
+    "expect_cms_confidence": {
+      "Microsoft-Exchange": {"min": 60}
+    }
+  },
+  {
+    "name": "owa_login_nginx",
+    "page": "owa_login_nginx.json",
+    "expect_cms_contains": ["Microsoft-Exchange"],
+    "expect_cms_absent": ["Nginx"],
+    "expect_cms_confidence": {
+      "Microsoft-Exchange": {"max": 49}
+    }
+  },
+  {
+    "name": "hikvision_camera_login",
+    "page": "hikvision_camera_login.json",
+    "expect_cms_contains": ["Hikvision-IP-Camera", "Hikvision-Cameras-and-Surveillance"],
+    "expect_version_contains": ["[DS-2CD2143G2-IU]"]
+  },
+  {
+    "name": "hp_printer_status",
+    "page": "hp_printer_status.json",
+    "expect_cms_contains": ["HP-LaserJet-Printer", "Conexant-EmWeb"],
+    "expect_version_contains": ["[HP LaserJet Pro MFP M428fdw]"],
+    "expect_cms_confidence": {
+      "Conexant-EmWeb": {"max": 80}
+    }
+  },
+  {
+    "name": "nginx_generic_portal",
+    "page": "nginx_generic_portal.json",
+    "expect_cms_absent": ["Nginx", "Apache", "PHP"]
+  },
+  {
+    "name": "tomcat_default",
+    "page": "tomcat_default.json",
+    "expect_cms_contains": ["Apache-Tomcat"],
+    "expect_cms_absent": ["Apache"]
+  },
+  {
+    "name": "grafana_login",
+    "page": "grafana_login.json",
+    "expect_cms_contains": ["Grafana"],
+    "expect_version_contains": ["Grafana 10.4.2"],
+    "expect_cms_absent": ["Nginx", "Apache-Struts2", "国家数字化学习资源中心系统", "TerraMaster-NAS", "Weaver-E-Weaver"]
+  },
+  {
+    "name": "swagger_petstore",
+    "page": "swagger_petstore.json",
+    "expect_cms_contains": ["Swagger UI"],
+    "expect_cms_absent": ["Access-Control", "SANGFOR-EDR"]
+  },
+  {
+    "name": "sonatype_nexus_repository_marketing",
+    "page": "sonatype_nexus_repository_marketing.json",
+    "expect_cms_absent": ["GitLab", "Kyan监控设备", "ranzhi", "Nexus Repository Manager", "AmazonWebServicesWebApplicationFirewall(Amazon)", "HttpOnly", "sangfor-reporting", "VMware Workspace ONE Access"]
+  },
+  {
+    "name": "jenkins_login",
+    "page": "jenkins_login.json",
+    "expect_cms_contains": ["Jenkins"],
+    "expect_version_contains": ["Jenkins 2.452.2"]
+  },
+  {
+    "name": "phpmyadmin_login",
+    "page": "phpmyadmin_login.json",
+    "expect_cms_contains": ["phpMyAdmin"],
+    "expect_cms_absent": ["Apache"]
+  },
+  {
+    "name": "rabbitmq_management",
+    "page": "rabbitmq_management.json",
+    "expect_cms_contains": ["RabbitMQ"],
+    "expect_version_contains": ["RabbitMQ 3.13.1"]
+  },
+  {
+    "name": "zabbix_login",
+    "page": "zabbix_login.json",
+    "expect_cms_contains": ["Zabbix"],
+    "expect_version_contains": ["Zabbix 7.0.0"],
+    "expect_cms_absent": ["Nginx"]
+  },
+  {
+    "name": "nginx_proxy_manager_login",
+    "page": "nginx_proxy_manager_login.json",
+    "expect_cms_contains": ["Nginx Proxy Manager"],
+    "expect_version_contains": ["Nginx Proxy Manager 2.15.1"],
+    "expect_cms_absent": ["OpenResty"]
+  },
+  {
+    "name": "uptime_kuma_about",
+    "page": "uptime_kuma_about.json",
+    "expect_cms_contains": ["Uptime-Kuma"],
+    "expect_version_contains": ["Uptime-Kuma 2.4.0"]
+  },
+  {
+    "name": "opensearch_root",
+    "page": "opensearch_root.json",
+    "expect_cms_contains": ["OpenSearch"],
+    "expect_version_contains": ["OpenSearch 2.16.0"]
+  },
+  {
+    "name": "opensearch_dashboards_login",
+    "page": "opensearch_dashboards_login.json",
+    "expect_cms_contains": ["OpenSearch Dashboards"],
+    "expect_version_contains": ["OpenSearch Dashboards 3.8.0"]
+  },
+  {
+    "name": "prometheus_graph",
+    "page": "prometheus_graph.json",
+    "expect_cms_contains": ["Prometheus", "Caddy"]
+  },
+  {
+    "name": "harbor_root",
+    "page": "harbor_root.json",
+    "expect_cms_contains": ["Harbor"]
+  },
+  {
+    "name": "portainer_root",
+    "page": "portainer_root.json",
+    "expect_cms_contains": ["Portainer"]
+  },
+  {
+    "name": "alibaba_druid_login",
+    "page": "alibaba_druid_login.json",
+    "expect_cms_contains": ["Alibaba-Druid"],
+    "expect_cms_absent": ["Apache-Druid", "登录页面"]
+  },
+  {
+    "name": "alibaba_druid_index",
+    "page": "alibaba_druid_index.json",
+    "expect_cms_contains": ["Alibaba-Druid"],
+    "expect_cms_absent": ["Apache-Druid"]
+  },
+  {
+    "name": "alertmanager_root",
+    "page": "alertmanager_root.json",
+    "expect_cms_contains": ["Alertmanager"]
+  },
+  {
+    "name": "cockpit_login",
+    "page": "cockpit_login.json",
+    "expect_cms_contains": ["Cockpit"],
+    "expect_cms_absent": ["Harbor", "深信服行为感知系统"]
+  },
+  {
+    "name": "jupyter_tree",
+    "page": "jupyter_tree.json",
+    "expect_cms_contains": ["Jupyter Notebook"],
+    "expect_cms_absent": ["JupyterLab"]
+  },
+  {
+    "name": "casdoor_root",
+    "page": "casdoor_root.json",
+    "expect_cms_contains": ["Casdoor"],
+    "expect_cms_absent": ["CAS单点登录"]
+  },
+  {
+    "name": "argocd_login",
+    "page": "argocd_login.json",
+    "expect_cms_contains": ["ArgoCD"]
+  },
+  {
+    "name": "consul_login",
+    "page": "consul_login.json",
+    "expect_cms_contains": ["Consul-HashiCorp"]
+  },
+  {
+    "name": "gitea_login",
+    "page": "gitea_login.json",
+    "expect_cms_contains": ["Gitea"],
+    "expect_version_contains": ["Gitea 1.27.0+dev-492-g9540292596"],
+    "expect_cms_absent": ["RAILS-Framework", "Drupal"]
+  }
+]

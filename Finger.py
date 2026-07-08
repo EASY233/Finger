@@ -1,31 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author = EASY
-from config import config
+# author = EASY233
+import os
+import warnings
 from lib.cmdline import cmdline
-from lib.checkenv import CheckEnv
-from lib.req import Request
-from lib.output import Output
-from lib.ipAttributable import IpAttributable
 from colorama import init as wininit
-from lib.options import initoptions
+from lib.app import FingerApplication
+
+# 过滤第三方库在新版 Python 下的 DeprecationWarning
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="xlsxwriter")
+
 wininit(autoreset=True)
 
 if __name__ == '__main__':
-    # 打印logo
-    print(config.Banner)
-    # 检测环境
-    check = CheckEnv()
-    # 加载参数
-    options = initoptions(cmdline())
-    run = Request()
-    IpAttributable()
-    save = Output()
+    from config import settings
 
-
-
-
-
-
-
-
+    print(settings.Banner)
+    app = FingerApplication()
+    app.run(cmdline())
